@@ -15,7 +15,7 @@ module.exports = () => {
 
   makeDir(reducersPath).then(path => {
     const reducerPath = `${path}/${name}.js`;
-    const reducerCode = createReducerCode(name);
+    const reducerCode = createReducerCode(name, actions);
 
     fs.writeFile(reducerPath, reducerCode, (err) => {
       if (err) {
@@ -28,9 +28,9 @@ module.exports = () => {
   
   makeDir(actionsPath).then(path => {
     const actionPath = `${path}/${name}.js`;
-    const reducerCode = createActionCode(name, actions);
+    const actionCode = createActionCode(name, actions);
 
-    fs.writeFile(actionPath, reducerCode, (err) => {
+    fs.writeFile(actionPath, actionCode, (err) => {
       if (err) {
         console.error(err)
         return
