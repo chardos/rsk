@@ -1,9 +1,15 @@
 function createActionCode(name) {
-  return `
-    function ${name}(state = initialState, action) {
-      return state
+  return `function addTodo(text) {
+    return {
+      type: ADD_TODO,
+      text
     }
-  `
+  }
+
+module.exports = ${name}
+`
 }
 
-module.exports = createReducerCode;
+
+
+module.exports = createActionCode;

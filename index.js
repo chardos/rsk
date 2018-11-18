@@ -2,6 +2,7 @@ const minimist = require('minimist');
 const fs = require('fs');
 const makeDir = require('make-dir');
 const createReducerCode = require('./helpers/createReducerCode');
+const createActionCode = require('./helpers/createActionCode');
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
@@ -17,6 +18,19 @@ module.exports = () => {
     const reducerCode = createReducerCode(name);
 
     fs.writeFile(reducerPath, reducerCode, (err) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      //file written successfully
+    })
+  });
+  
+  makeDir(actionsPath).then(path => {
+    const actionPath = `${path}/${name}.js`;
+    const reducerCode = createActionCode(name);
+
+    fs.writeFile(actionPath, reducerCode, (err) => {
       if (err) {
         console.error(err)
         return
