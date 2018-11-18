@@ -7,7 +7,7 @@ const createActionCode = require('./helpers/createActionCode');
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
   const commands = args._;
-  const name = commands[0];
+  const [name, ...actions] = commands;
 
   const actionsPath = 'src/actions';
   const reducersPath = 'src/reducers';
@@ -28,7 +28,7 @@ module.exports = () => {
   
   makeDir(actionsPath).then(path => {
     const actionPath = `${path}/${name}.js`;
-    const reducerCode = createActionCode(name);
+    const reducerCode = createActionCode(name, actions);
 
     fs.writeFile(actionPath, reducerCode, (err) => {
       if (err) {
