@@ -1,6 +1,4 @@
 const minimist = require('minimist');
-const fs = require('fs');
-const makeDir = require('make-dir');
 const createReducerFile = require('./createReducerFile');
 const createActionFile = require('./createActionFile');
 
