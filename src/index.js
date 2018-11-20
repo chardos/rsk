@@ -3,6 +3,7 @@ const fs = require('fs');
 const makeDir = require('make-dir');
 const createReducerCode = require('./helpers/createReducerCode');
 const createActionCode = require('./helpers/createActionCode');
+const prettier = require('prettier');
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
@@ -16,6 +17,7 @@ module.exports = () => {
   makeDir(reducersPath).then(path => {
     const reducerPath = `${path}/${name}.js`;
     const reducerCode = createReducerCode(name, actions);
+    console.log(prettier.format(reducerCode, {parser: 'babylon'}))
 
     fs.writeFile(reducerPath, reducerCode, (err) => {
       if (err) {
