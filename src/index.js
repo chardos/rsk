@@ -1,36 +1,21 @@
 const minimist = require('minimist');
 const fs = require('fs');
 const makeDir = require('make-dir');
-const createReducerCode = require('./helpers/createReducerCode');
+const createReducerFile = require('./createReducerFile');
 const createActionCode = require('./helpers/createActionCode');
-const prettier = require('prettier');
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
   const commands = args._;
-  const [name, ...actions] = commands;
+  const [reducerName, ...actions] = commands;
 
   const actionsPath = 'src/actions';
-  const reducersPath = 'src/reducers';
 
-
-  makeDir(reducersPath).then(path => {
-    const reducerPath = `${path}/${name}.js`;
-    const reducerCode = createReducerCode(name, actions);
-    console.log(prettier.format(reducerCode, {parser: 'babylon'}))
-
-    fs.writeFile(reducerPath, reducerCode, (err) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      //file written successfully
-    })
-  });
+  createReducerFile(reducerName, actions);
   
   makeDir(actionsPath).then(path => {
-    const actionPath = `${path}/${name}.js`;
-    const actionCode = createActionCode(name, actions);
+    const actionPath = `${path}/${reducerName}.js`;
+    const actionCode = createActionCode(reducerName, actions);
 
     fs.writeFile(actionPath, actionCode, (err) => {
       if (err) {

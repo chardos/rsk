@@ -30,9 +30,7 @@ const renderCases = (actions) => {
 
 const renderImports = (name, actions) => {
   const imports = actions
-    .map(actionName => (
-      changeCase.constantCase(actionName)
-    ))
+    .map(actionName => changeCase.constantCase(actionName))
     .join(',')
 
 
