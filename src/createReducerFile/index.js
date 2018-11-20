@@ -3,8 +3,8 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateReducerCode = require('./generateReducerCode');
 
-module.exports = (reducerName, actions) => {
-  const reducersPath = 'src/reducers';
+module.exports = ({srcPath, reducerName, actions}) => {
+  const reducersPath = `${srcPath}/reducers`;
 
   makeDir(reducersPath).then(path => {
     const reducerPath = `${path}/${reducerName}.js`;
