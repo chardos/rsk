@@ -38,4 +38,7 @@ module.exports = () => {
       //file written successfully
     })
   });
+
+  // TODO: find the file with combine reducers in it
+  // use https://www.npmjs.com/package/find-in-files
 }
