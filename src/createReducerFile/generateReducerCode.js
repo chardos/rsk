@@ -4,6 +4,14 @@ function createReducerCode(name, actions) {
   return `
     ${renderImports(name, actions)}
     
+    ${renderSwitchStatement(name, actions)}
+
+    export default ${name}
+  `
+}
+
+const renderSwitchStatement = (name, actions) => {
+  return `
     function ${name}(state = {}, action) {
       switch (action.type) {
         ${renderCases(actions)}
@@ -11,8 +19,6 @@ function createReducerCode(name, actions) {
           return state;
       }
     }
-
-    export default ${name}
   `
 }
 
@@ -32,7 +38,6 @@ const renderImports = (name, actions) => {
   const imports = actions
     .map(actionName => changeCase.constantCase(actionName))
     .join(',')
-
 
   return `
     import { 

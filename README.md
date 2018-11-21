@@ -9,5 +9,5 @@ A CLI tool for scaffolding actions and reducers for redux.
 ## Using it
 
 ```
-rds <reducer name> <action name> <action name>
+treedux <reducer name> <any number of action names>
 ```
