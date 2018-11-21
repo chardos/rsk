@@ -10,11 +10,16 @@ module.exports = () => {
   const commands = args._;
   const [reducerName, ...actions] = commands;
 
-  findUp('src').then(srcPath => {
-    // createDuckFile({srcPath, reducerName, actions});
-    createReducerFile({srcPath, reducerName, actions});
-    createActionFile({srcPath, reducerName, actions});
-  })
+  findUp('src')
+    .then(srcPath => {
+      if (!srcPath) throw new Error("Couldn't find a 'src' directory in the your project.")
+      // createDuckFile({srcPath, reducerName, actions});
+      createReducerFile({srcPath, reducerName, actions});
+      createActionFile({srcPath, reducerName, actions});
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
 
   // TODO: find the file with combine reducers in it
