@@ -10,6 +10,7 @@ module.exports = () => {
   const [reducerName, ...actions] = commands;
 
   findUp('src').then(srcPath => {
+    // createReducerFile({srcPath, reducerName, actions});
     createReducerFile({srcPath, reducerName, actions});
     createActionFile({srcPath, reducerName, actions});
   })
