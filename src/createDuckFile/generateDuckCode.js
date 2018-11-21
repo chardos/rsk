@@ -1,12 +1,15 @@
+const { renderSwitchStatement, renderImports } = require('../helpers/generation')
 const changeCase = require('change-case')
 
 function createDuckCode(name, actions) {
   const constants = renderConstants(actions);
-  const functions = renderFunctions(actions);
+  const reducer = renderSwitchStatement(name, actions)
+  const actionFunctions = renderFunctions(actions);
 
   return `
     ${constants}  
-    ${functions}
+    ${reducer}
+    ${actionFunctions}
   `
 }
 
