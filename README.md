@@ -1,10 +1,10 @@
-# Redux Scaffolder
+# treedux
 
 A CLI tool for scaffolding actions and reducers for redux.
 
 ## Installation
 
-`npm i -g redux-scaffolder`
+`npm i -g treedux`
 
 ## Using it
 
