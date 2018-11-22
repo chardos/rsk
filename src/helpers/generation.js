@@ -20,7 +20,7 @@ exports.renderImports = (name, actions) => {
   return `
     import { 
       ${imports}
-    } from './actions/${name}'  
+    } from '../actions/${name}'  
   `
 }
 

@@ -1,14 +1,19 @@
 const minimist = require('minimist');
+const findUp = require('find-up');
 const createReducerFile = require('./createReducerFile');
 const createActionFile = require('./createActionFile');
 const createDuckFile = require('./createDuckFile');
-
-const findUp = require('find-up');
+const getConfig = require('./helpers/getConfig');
+const CONFIG_FILE_NAME = '.rsk';
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
   const commands = args._;
   const [reducerName, ...actions] = commands;
+
+  findUp(CONFIG_FILE_NAME)
+    .then(getConfig)
+    .then(console.log)
 
   findUp('src')
     .then(srcPath => {
