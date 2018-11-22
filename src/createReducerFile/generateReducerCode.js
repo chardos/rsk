@@ -1,4 +1,4 @@
-const { renderSwitchStatement, renderImports } = require('../helpers/generation')
+const { renderSwitchStatement, renderImports } = require('../helpers/renderers')
 const changeCase = require('change-case')
 
 function createReducerCode(name, actions) {

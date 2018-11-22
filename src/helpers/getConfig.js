@@ -5,19 +5,29 @@ const defaultConfig = {
   codePath: 'src'
 }
 
-const getConfig = (path) => {
+const getConfig = (obj) => {
+  const { path } = obj;
+  console.log(obj)
+  
   return new Promise((resolve) => {
     if (path) {
       fs.readFile(path, 'utf8', function(err, contents) {
         const userConfig = JSON.parse(contents)
-
-        resolve({
+        const mergedConfig = {
           ...defaultConfig,
           ...userConfig
+        };
+
+        resolve({
+          ...obj,
+          config: mergedConfig
         });
       });
     } else {
-      resolve(defaultConfig)
+      resolve({
+        ...obj,
+        config: defaultConfig
+      });
     }
   })
 }
