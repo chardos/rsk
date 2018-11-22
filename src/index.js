@@ -8,10 +8,10 @@ const logger = require('./helpers/logger');
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
   const commands = args._;
-  const [reducerName, ...actions] = commands;
+  const [command, ...positionalArgs] = commands;
 
   findUp(CONFIG_FILE_NAME)
-    .then((path) => ({path, reducerName, actions}))
+    .then((path) => ({path, command, positionalArgs}))
     .then(getConfig)
     .then(createFiles)
     .catch(logger.error)

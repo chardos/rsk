@@ -1,23 +1,39 @@
+const changeCase = require('change-case')
 const findUp = require('find-up');
 const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
+const createComponentFile = require('../createComponentFile');
 
 const createFiles = async(obj) => {
-  const { config, reducerName, actions } = obj;
+  console.log(obj)
+  const { config, command, positionalArgs } = obj;
   const { codePath, style } = config;
   
   const srcPath = await findUp(codePath);
 
   if (!srcPath) throw new Error(`Couldn't find a ${codePath} directory in the your project.`)
   
-  if (style === 'rails') {
-    createReducerFile({srcPath, reducerName, actions});
-    createActionFile({srcPath, reducerName, actions});
+  if (command === 'sfc') {
+    const [componentName] = positionalArgs;
+    const pascalCaseName = changeCase.pascalCase(componentName);
+
+    await createComponentFile({
+      srcPath, 
+      componentName: pascalCaseName
+    });
   }
 
-  if (style === 'ducks') {
-    createDuckFile({srcPath, reducerName, actions});
+  if (command === 'reducer') {
+    const [reducerName, ...actions] = positionalArgs;
+    if (style === 'rails') {
+      await createReducerFile({srcPath, reducerName, actions});
+      await createActionFile({srcPath, reducerName, actions});
+    }
+  
+    if (style === 'ducks') {
+      await createDuckFile({srcPath, reducerName, actions});
+    }
   }
 }
 

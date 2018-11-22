@@ -6,7 +6,7 @@ const generateDuckCode = require('./generateDuckCode');
 module.exports = ({srcPath, reducerName, actions}) => {
   const ducksDirectoryPath = `${srcPath}/ducks`;
 
-  makeDir(ducksDirectoryPath).then(() => {
+  return makeDir(ducksDirectoryPath).then(() => {
     const duckFilePath = `${ducksDirectoryPath}/${reducerName}.js`;
     const duckCode = generateDuckCode(reducerName, actions);
     const prettifiedCode = prettier.format(duckCode, {parser: 'babylon'});

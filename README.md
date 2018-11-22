@@ -8,8 +8,23 @@ A CLI tool for scaffolding actions and reducers for redux.
 
 ## Using it
 
+
+#### React Stateless Component
+
 ```
-rsk <reducer name> <any number of action names>
+rsk sfc <component name>
+```
+
+#### React Class Component
+
+```
+rsk cc <component name>
+```
+
+#### Redux
+
+```
+rsk reducer <reducer name> <any number of action names>
 ```
 
 ## Config
