@@ -1,6 +1,6 @@
 # React Scaffold Kit
 
-A CLI tool for scaffolding actions and reducers for redux.
+A CLI tool for scaffolding react and redux applications
 
 ## Installation
 

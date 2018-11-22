@@ -1,7 +1,7 @@
 {
   "name": "rsk",
   "version": "0.0.2",
-  "description": "A CLI tool for scaffolding actions and reducers for redux",
+  "description": "A CLI tool for scaffolding react and redux applications",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
