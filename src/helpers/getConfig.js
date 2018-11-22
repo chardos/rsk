@@ -7,7 +7,6 @@ const defaultConfig = {
 
 const getConfig = (obj) => {
   const { path } = obj;
-  console.log(obj)
   
   return new Promise((resolve) => {
     if (path) {
