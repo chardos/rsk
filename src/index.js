@@ -4,7 +4,7 @@ const getConfig = require('./helpers/getConfig');
 const createFiles = require('./helpers/createFiles');
 const CONFIG_FILE_NAME = '.rsk';
 const logger = require('./helpers/logger');
-const COMMANDS = ['sfc', 'cc', 'reducer'];
+const { COMMANDS } = require('./constants/commands');
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))

@@ -4,6 +4,8 @@ const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
 const createComponentFile = require('../createComponentFile');
+const { SFC, CC } = require('../constants/commands');
+
 
 const createFiles = async(obj) => {
   console.log(obj)
@@ -13,8 +15,8 @@ const createFiles = async(obj) => {
   const srcPath = await findUp(codeDirectory);
 
   if (!srcPath) throw new Error(`Couldn't find a ${codeDirectory} directory in the your project.`)
-  
-  if (command === 'sfc' || command === 'cc') {
+  console.log('HELLO MATE', SFC)
+  if (command === SFC || command === CC) {
     const [componentName] = positionalArgs;
     const pascalCaseName = changeCase.pascalCase(componentName);
 
