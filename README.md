@@ -1,13 +1,13 @@
-# treedux
+# React Scaffold Kit
 
 A CLI tool for scaffolding actions and reducers for redux.
 
 ## Installation
 
-`npm i -g treedux`
+`npm i -g rsk`
 
 ## Using it
 
 ```
-treedux <reducer name> <any number of action names>
+rsk <reducer name> <any number of action names>
 ```

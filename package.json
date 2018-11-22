@@ -1,15 +1,15 @@
 {
-  "name": "treedux",
-  "version": "0.0.2",
-  "description": "",
+  "name": "rsk",
+  "version": "0.0.1",
+  "description": "A CLI tool for scaffolding actions and reducers for redux",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "treedux": "bin/scaffolder"
+    "rsk": "bin/scaffolder"
   },
-  "author": "",
+  "author": "Richard Tan",
   "license": "ISC",
   "dependencies": {
     "app-root-path": "2.1.0",
