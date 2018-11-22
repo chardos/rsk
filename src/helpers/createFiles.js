@@ -8,11 +8,11 @@ const createComponentFile = require('../createComponentFile');
 const createFiles = async(obj) => {
   console.log(obj)
   const { config, command, positionalArgs } = obj;
-  const { codePath, style } = config;
+  const { codeDirectory, style } = config;
   
-  const srcPath = await findUp(codePath);
+  const srcPath = await findUp(codeDirectory);
 
-  if (!srcPath) throw new Error(`Couldn't find a ${codePath} directory in the your project.`)
+  if (!srcPath) throw new Error(`Couldn't find a ${codeDirectory} directory in the your project.`)
   
   if (command === 'sfc' || command === 'cc') {
     const [componentName] = positionalArgs;
@@ -21,7 +21,8 @@ const createFiles = async(obj) => {
     await createComponentFile({
       srcPath,
       componentName: pascalCaseName,
-      command
+      command,
+      config
     });
   }
 

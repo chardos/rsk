@@ -3,15 +3,16 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const render = require('../renderers/react');
 
-module.exports = ({srcPath, componentName, command}) => {
-  const componentsDirectory = `${srcPath}/components/${componentName}`;
+module.exports = ({srcPath, componentName, command, config}) => {
+  const { componentsDirectory } = config;
+  const componentPath = `${srcPath}/${componentsDirectory}/${componentName}`;
 
-  makeDir(componentsDirectory).then(() => {
-    const componentPath = `${componentsDirectory}/index.js`;
+  makeDir(componentPath).then(() => {
+    const indexPath = `${componentPath}/index.js`;
     const actionCode = render[command](componentName);
     const prettifiedCode = prettier.format(actionCode, {parser: 'babylon'});
 
-    fs.writeFile(componentPath, prettifiedCode, (err) => {
+    fs.writeFile(indexPath, prettifiedCode, (err) => {
       if (err) {
         console.error(err)
         return

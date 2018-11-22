@@ -2,7 +2,8 @@ const fs = require('fs');
 
 const defaultConfig = {
   style: 'rails',
-  codePath: 'src'
+  codeDirectory: 'src',
+  componentsDirectory: 'components'
 }
 
 const getConfig = (obj) => {
