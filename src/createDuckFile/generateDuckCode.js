@@ -1,4 +1,4 @@
-const { renderSwitchStatement } = require('../helpers/renderers')
+const { renderSwitchStatement } = require('../renderers/redux')
 const changeCase = require('change-case')
 
 function createDuckCode(name, actions) {
