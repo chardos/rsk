@@ -1,14 +1,14 @@
 const fs = require('fs');
 const prettier = require('prettier');
 const makeDir = require('make-dir');
-const { renderSfc } = require('../renderers/react');
+const render = require('../renderers/react');
 
-module.exports = ({srcPath, componentName}) => {
+module.exports = ({srcPath, componentName, command}) => {
   const componentsDirectory = `${srcPath}/components/${componentName}`;
 
   makeDir(componentsDirectory).then(() => {
     const componentPath = `${componentsDirectory}/index.js`;
-    const actionCode = renderSfc(componentName);
+    const actionCode = render[command](componentName);
     const prettifiedCode = prettier.format(actionCode, {parser: 'babylon'});
 
     fs.writeFile(componentPath, prettifiedCode, (err) => {

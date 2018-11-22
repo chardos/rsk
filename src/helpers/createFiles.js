@@ -14,13 +14,14 @@ const createFiles = async(obj) => {
 
   if (!srcPath) throw new Error(`Couldn't find a ${codePath} directory in the your project.`)
   
-  if (command === 'sfc') {
+  if (command === 'sfc' || command === 'cc') {
     const [componentName] = positionalArgs;
     const pascalCaseName = changeCase.pascalCase(componentName);
 
     await createComponentFile({
-      srcPath, 
-      componentName: pascalCaseName
+      srcPath,
+      componentName: pascalCaseName,
+      command
     });
   }
 
