@@ -4,11 +4,15 @@ const getConfig = require('./helpers/getConfig');
 const createFiles = require('./helpers/createFiles');
 const CONFIG_FILE_NAME = '.rsk';
 const logger = require('./helpers/logger');
+const COMMANDS = ['sfc', 'cc', 'reducer'];
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2))
   const commands = args._;
   const [command, ...positionalArgs] = commands;
+  if (!COMMANDS.includes(command)) {
+    throw new Error(`${command} is not a valid command.`)
+  }
 
   findUp(CONFIG_FILE_NAME)
     .then((path) => ({path, command, positionalArgs}))
