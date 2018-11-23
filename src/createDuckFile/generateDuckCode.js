@@ -1,17 +1,5 @@
-const { renderSwitchStatement } = require('../renderers/redux');
 const changeCase = require('change-case');
-
-function createDuckCode(name, actions) {
-  const constants = renderConstants(actions);
-  const reducer = renderSwitchStatement(name, actions);
-  const actionFunctions = renderFunctions(actions);
-
-  return `
-    ${constants}  
-    ${reducer}
-    ${actionFunctions}
-  `;
-}
+const { renderSwitchStatement } = require('../renderers/redux');
 
 const renderConstants = actions => (
   actions
@@ -39,4 +27,14 @@ const renderFunctions = actions => (
     .join('\n')
 );
 
-module.exports = createDuckCode;
+module.exports = function createDuckCode(name, actions) {
+  const constants = renderConstants(actions);
+  const reducer = renderSwitchStatement(name, actions);
+  const actionFunctions = renderFunctions(actions);
+
+  return `
+    ${constants}  
+    ${reducer}
+    ${actionFunctions}
+  `;
+};
