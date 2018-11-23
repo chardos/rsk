@@ -14,9 +14,10 @@ module.exports = ({srcPath, componentName, command, config}) => {
 
     fs.writeFile(indexPath, prettifiedCode, (err) => {
       if (err) {
-        console.error(err)
+        console.error(err);
         return
       }
+      
       //file written successfully
     })
   });
