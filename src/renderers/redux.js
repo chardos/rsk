@@ -1,7 +1,6 @@
-const changeCase = require('change-case')
+const changeCase = require('change-case');
 
-exports.renderSwitchStatement = (name, actions) => {
-  return `
+exports.renderSwitchStatement = (name, actions) => `
     export default function ${name}(state = {}, action) {
       switch (action.type) {
         ${renderCases(actions)}
@@ -9,20 +8,19 @@ exports.renderSwitchStatement = (name, actions) => {
           return state;
       }
     }
-  `
-}
+  `;
 
 exports.renderImports = (name, actions) => {
   const imports = actions
     .map(actionName => changeCase.constantCase(actionName))
-    .join(',')
+    .join(',');
 
   return `
     import { 
       ${imports}
     } from '../actions/${name}'  
-  `
-}
+  `;
+};
 
 
 const renderCases = (actions) => {
@@ -31,8 +29,8 @@ const renderCases = (actions) => {
     return `
       case ${constantName}:
         return state;
-    `
+    `;
   });
 
   return cases.join('');
-}
+};

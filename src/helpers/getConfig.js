@@ -3,33 +3,33 @@ const fs = require('fs');
 const defaultConfig = {
   style: 'rails',
   codeDirectory: 'src',
-  componentsDirectory: 'components'
-}
+  componentsDirectory: 'components',
+};
 
 const getConfig = (obj) => {
   const { path } = obj;
-  
+
   return new Promise((resolve) => {
     if (path) {
-      fs.readFile(path, 'utf8', function(err, contents) {
-        const userConfig = JSON.parse(contents)
+      fs.readFile(path, 'utf8', (err, contents) => {
+        const userConfig = JSON.parse(contents);
         const mergedConfig = {
           ...defaultConfig,
-          ...userConfig
+          ...userConfig,
         };
 
         resolve({
           ...obj,
-          config: mergedConfig
+          config: mergedConfig,
         });
       });
     } else {
       resolve({
         ...obj,
-        config: defaultConfig
+        config: defaultConfig,
       });
     }
-  })
-}
+  });
+};
 
 module.exports = getConfig;
