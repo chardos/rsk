@@ -22,6 +22,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
     }
     
     const prettifiedCode = prettier.format(duckCode, { parser: 'babylon' });
+    console.log('prettifiedCode', prettifiedCode);
 
     fs.writeFile(duckFilePath, prettifiedCode, (err) => {
       if (err) {
