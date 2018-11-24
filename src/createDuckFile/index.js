@@ -21,8 +21,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
       duckCode = generateDuckCode(reducerName, actions);
     }
     
-    // const prettifiedCode = prettier.format(duckCode, { parser: 'babylon' });
-    const prettifiedCode = JSON.parse(duckCode);
+    const prettifiedCode = prettier.format(duckCode, { parser: 'babylon' });
 
     fs.writeFile(duckFilePath, prettifiedCode, (err) => {
       if (err) {

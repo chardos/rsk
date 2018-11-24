@@ -8,7 +8,7 @@ const { SFC, CC } = require('../constants/commands');
 
 
 const createFiles = async (obj) => {
-  console.log(obj);
+  // console.log(obj);
   const { config, command, positionalArgs } = obj;
   const { codeDirectory, style } = config;
 
