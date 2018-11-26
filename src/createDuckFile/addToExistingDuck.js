@@ -1,7 +1,7 @@
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
-const { renderExportedConstant, renderSwitchStatement, renderActionCreator } = require('../renderers/redux');
+const { renderExportedConstant, renderActionCreator, renderCases } = require('../renderers/redux');
 const t =  require("@babel/types");
 
 const addToExistingDuck = (reducerName, actions, existingFile) => {
@@ -11,10 +11,10 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
 
   let lastConstantExport;
   let lastActionCreatorExport;
+  let lastSwitchCaseStatement;
 
   traverse(ast, {
     ExportNamedDeclaration(path) {
-
       const init = path.get('declaration.declarations.0.init');
       const isArrowFn = t.isArrowFunctionExpression(init);
       const isStringLiteral = t.isStringLiteral(init);
@@ -26,9 +26,10 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
       if (isArrowFn) {
         lastActionCreatorExport = path;
       }
-      
-      // console.log('path.node', path.node);
-      // console.log('t.isArrowFunctionExpression(path.node)', t.isArrowFunctionExpression(path.node));
+    },
+
+    SwitchCase(path) {
+      lastSwitchCaseStatement = path;
     }
   })
   
@@ -40,8 +41,25 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
     .map(renderActionCreator)
     .join('\n')
 
+  const casesCode = renderCases(actions);
+
+  const rando = t.switchCase(
+    t.identifier('BIM_BAM'),
+    [
+      t.returnStatement(
+        t.identifier('state')
+      )
+    ]
+  );
+
+  console.log(
+    'slamburger',
+    rando
+  );
+
   lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
   lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
+  lastSwitchCaseStatement.insertAfter(rando)
 
   const newCode = generate(ast).code;
   return newCode

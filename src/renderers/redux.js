@@ -42,13 +42,16 @@ exports.renderActionCreator = (actionName) => {
 
 
 const renderCases = (actions) => {
-  const cases = actions.map((actionName) => {
-    const constantName = changeCase.constantCase(actionName);
-    return `
-      case ${constantName}:
-        return state;
-    `;
-  });
-
+  const cases = actions.map(renderCase);
   return cases.join('');
 };
+
+const renderCase = (actionName) => {
+  const constantName = changeCase.constantCase(actionName);
+  return `
+    case ${constantName}:
+      return state;
+  `;
+}
+
+exports.renderCases = renderCases;
