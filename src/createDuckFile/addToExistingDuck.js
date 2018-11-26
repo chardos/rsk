@@ -1,6 +1,7 @@
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
+const { renderSwitchStatement, renderActionCreator } = require('../renderers/redux');
 const t =  require("@babel/types");
 
 const addToExistingDuck = (reducerName, actions, existingFile) => {
@@ -12,19 +13,14 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
   traverse(ast, {
     ExportNamedDeclaration(path) {
       lastImport = path;
-      console.log('path.container.unshift',path.container.unshift)
     }
   })
+  
+  const actionsCode = actions
+    .map(renderActionCreator)
+    .join('\n')
 
-  lastImport.insertAfter(t.arrowFunctionExpression(
-    [],
-    t.blockStatement([
-      t.returnStatement(t.stringLiteral('bro'))
-    ])
-  ));
-
-  // t.importDeclaration( [t.importDefaultSpecifier(t.identifier('tasksReducer'))], t.stringLiteral('./reducers/tasks'), )
-
+  lastImport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
 
   const newCode = generate(ast).code;
   return newCode
