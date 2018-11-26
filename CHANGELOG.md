@@ -1,3 +1,6 @@
+#### 0.0.6
+- Support for existing ducks files
+
 #### 0.0.5
 - Added configurable components directory
 
