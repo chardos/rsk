@@ -1,8 +1,8 @@
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
-const { renderExportedConstant, renderActionCreator, renderCases } = require('../renderers/redux');
-const t =  require("@babel/types");
+const { renderExportedConstant, renderActionCreator, generateCaseObject } = require('../renderers/redux');
+const t = require("@babel/types");
 
 const addToExistingDuck = (reducerName, actions, existingFile) => {
   const ast = parser(existingFile, {sourceType: 'module'});
@@ -41,25 +41,25 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
     .map(renderActionCreator)
     .join('\n')
 
-  const casesCode = renderCases(actions);
+  const casesCode = actions.map(generateCaseObject);
 
-  const rando = t.switchCase(
-    t.identifier('BIM_BAM'),
-    [
-      t.returnStatement(
-        t.identifier('state')
-      )
-    ]
-  );
+  // const rando = t.switchCase(
+  //   t.identifier('BIM_BAM'),
+  //   [
+  //     t.returnStatement(
+  //       t.identifier('state')
+  //     )
+  //   ]
+  // );
 
-  console.log(
-    'slamburger',
-    rando
-  );
+  // console.log(
+  //   'slamburger',
+  //   rando
+  // );
 
   lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
   lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
-  lastSwitchCaseStatement.insertAfter(rando)
+  lastSwitchCaseStatement.insertBefore(casesCode)
 
   const newCode = generate(ast).code;
   return newCode

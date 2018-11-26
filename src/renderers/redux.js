@@ -1,4 +1,5 @@
 const changeCase = require('change-case');
+const t = require("@babel/types");
 
 exports.renderSwitchStatement = (name, actions) => `
     export default function ${name}(state = {}, action) {
@@ -54,4 +55,16 @@ const renderCase = (actionName) => {
   `;
 }
 
+const generateCaseObject = (actionName) => (
+  t.switchCase(
+    t.identifier(changeCase.constantCase(actionName)),
+    [
+      t.returnStatement(
+        t.identifier('state')
+      )
+    ]
+  )
+)
+
+exports.generateCaseObject = generateCaseObject;
 exports.renderCases = renderCases;
