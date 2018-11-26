@@ -2,6 +2,7 @@ const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const { renderExportedConstant, renderActionCreator, generateCaseObject } = require('../renderers/redux');
+const get = require('lodash.get');
 const t = require("@babel/types");
 
 const addToExistingDuck = (reducerName, actions, existingFile) => {
@@ -15,7 +16,7 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
 
   traverse(ast, {
     ExportNamedDeclaration(path) {
-      const init = path.get('declaration.declarations.0.init');
+      const init = get(path, 'node.declaration.declarations.0.init');
       const isArrowFn = t.isArrowFunctionExpression(init);
       const isStringLiteral = t.isStringLiteral(init);
 
@@ -42,20 +43,6 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
     .join('\n')
 
   const casesCode = actions.map(generateCaseObject);
-
-  // const rando = t.switchCase(
-  //   t.identifier('BIM_BAM'),
-  //   [
-  //     t.returnStatement(
-  //       t.identifier('state')
-  //     )
-  //   ]
-  // );
-
-  // console.log(
-  //   'slamburger',
-  //   rando
-  // );
 
   lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
   lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
