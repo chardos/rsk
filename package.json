@@ -1,6 +1,6 @@
 {
   "name": "rsk",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A CLI tool for scaffolding react and redux applications",
   "main": "index.js",
   "scripts": {
