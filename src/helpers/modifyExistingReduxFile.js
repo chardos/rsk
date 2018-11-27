@@ -2,16 +2,17 @@ const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const { renderExportedConstant, renderActionCreator, generateCaseObject, makeImportSpecifier } = require('../renderers/redux');
+const { checkHasDuplicates } = require('../utils');
 const get = require('lodash.get');
 const t = require("@babel/types");
 
 /**
- * modifyExistingReduxFile -
+ * addActionsToReduxFile -
  * This function will take any reducer, action, or duck file, and add
  * the new actions to it.
  */
 
-const addToExistingDuck = (reducerName, actions, existingFile) => {
+const addActionsToReduxFile = (reducerName, actions, existingFile) => {
   const ast = parser(existingFile, {sourceType: 'module'});
 
   let lastConstantExport;
@@ -66,11 +67,19 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
   }
 
   if (lastImportSpecifier) {
-    console.log('lastImportSpecifier', lastImportSpecifier);
     const specifiers = actions.map(makeImportSpecifier)
     lastImportSpecifier.insertAfter(specifiers)
   }
 
+  // throw error if any 2 actions are the same in the import.
+  if (lastImportSpecifier) {
+    const names = lastImportSpecifier.parent.specifiers.map(specifier => specifier.imported.name)
+    const hasDuplicates = checkHasDuplicates(names);
+    if (hasDuplicates) {
+      throw 'Duplicate actions detected in import statement.'
+    }
+  }
+  
   const newCode = generate(ast).code;
   return newCode
 }
@@ -78,4 +87,4 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
 
 
 
-module.exports = addToExistingDuck;
+module.exports = addActionsToReduxFile;
