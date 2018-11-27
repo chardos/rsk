@@ -3,6 +3,7 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateDuckCode = require('./generateDuckCode');
 const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
+const logger = require('../helpers/logger');
 
 module.exports = ({ srcPath, reducerName, actions }) => {
   const ducksDirectoryPath = `${srcPath}/ducks`;
@@ -13,7 +14,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
 
     // check here if the file exists
     if (fs.existsSync(duckFilePath)) {
-      console.log(`${reducerName}.js exists.`)
+      logger.success(`ducks/${reducerName}.js exists. Adding actions: ${actions.join(', ')}`)
 
       const existingFile = fs.readFileSync(duckFilePath).toString();
       duckCode = addActionsToReduxFile(reducerName, actions, existingFile);
@@ -22,7 +23,6 @@ module.exports = ({ srcPath, reducerName, actions }) => {
     }
     
     const prettifiedCode = prettier.format(duckCode, { parser: 'babylon' });
-    console.log('prettifiedCode', prettifiedCode);
 
     fs.writeFile(duckFilePath, prettifiedCode, (err) => {
       if (err) {

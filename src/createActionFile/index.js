@@ -3,6 +3,7 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateActionCode = require('./generateActionCode');
 const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
+const logger = require('../helpers/logger');
 
 module.exports = async ({ srcPath, reducerName, actions }) => {
   const actionsPath = `${srcPath}/actions`;
@@ -12,11 +13,12 @@ module.exports = async ({ srcPath, reducerName, actions }) => {
   let actionCode;
 
   if (fs.existsSync(actionPath)) {
-    console.log(`actions/${reducerName}.js exists.`)
+    logger.success(`actions/${reducerName}.js exists. Adding actions: ${actions.join(', ')}`)
 
     const existingFile = fs.readFileSync(actionPath).toString();
     actionCode = addActionsToReduxFile(reducerName, actions, existingFile);
   } else {
+    logger.success(`Creating actions/${reducerName}.js`)
     actionCode = generateActionCode(reducerName, actions);
   }
 

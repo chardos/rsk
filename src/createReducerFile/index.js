@@ -3,6 +3,7 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateReducerCode = require('./generateReducerCode');
 const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
+const logger = require('../helpers/logger');
 
 module.exports = async({ srcPath, reducerName, actions }) => {
   const reducersPath = `${srcPath}/reducers`;
@@ -12,7 +13,7 @@ module.exports = async({ srcPath, reducerName, actions }) => {
   let reducerCode;
 
   if (fs.existsSync(reducerPath)) {
-    console.log(`reducers/${reducerName}.js exists.`)
+    logger.success(`reducers/${reducerName}.js exists. Adding actions: ${actions.join(', ')}`)
 
     const existingFile = fs.readFileSync(reducerPath).toString();
     reducerCode = addActionsToReduxFile(reducerName, actions, existingFile);
@@ -26,6 +27,5 @@ module.exports = async({ srcPath, reducerName, actions }) => {
     if (err) {
       console.error(err);
     }
-    // file written successfully
   });
 };
