@@ -76,7 +76,7 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
     const names = lastImportSpecifier.parent.specifiers.map(specifier => specifier.imported.name)
     const hasDuplicates = checkHasDuplicates(names);
     if (hasDuplicates) {
-      throw 'Duplicate actions detected in import statement.'
+      throw new Error(`Duplicate actions detected in import statement in ${reducerName}`);
     }
   }
   

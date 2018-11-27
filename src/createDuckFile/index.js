@@ -2,7 +2,7 @@ const fs = require('fs');
 const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateDuckCode = require('./generateDuckCode');
-const modifyExistingReduxFile = require('../helpers/modifyExistingReduxFile');
+const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
 
 module.exports = ({ srcPath, reducerName, actions }) => {
   const ducksDirectoryPath = `${srcPath}/ducks`;
@@ -16,7 +16,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
       console.log(`${reducerName}.js exists.`)
 
       const existingFile = fs.readFileSync(duckFilePath).toString();
-      duckCode = modifyExistingReduxFile(reducerName, actions, existingFile);
+      duckCode = addActionsToReduxFile(reducerName, actions, existingFile);
     } else {
       duckCode = generateDuckCode(reducerName, actions);
     }
