@@ -1,7 +1,7 @@
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
-const { renderExportedConstant, renderActionCreator, generateCaseObject } = require('../renderers/redux');
+const { renderExportedConstant, renderActionCreator, generateCaseObject, makeImportSpecifier } = require('../renderers/redux');
 const get = require('lodash.get');
 const t = require("@babel/types");
 
@@ -17,6 +17,7 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
   let lastConstantExport;
   let lastActionCreatorExport;
   let lastSwitchCaseStatement;
+  let lastImportSpecifier;
 
   traverse(ast, {
     ExportNamedDeclaration(path) {
@@ -35,6 +36,10 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
 
     SwitchCase(path) {
       lastSwitchCaseStatement = path;
+    },
+
+    ImportSpecifier(path) {
+      lastImportSpecifier = path;
     }
   })
   
@@ -42,7 +47,7 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
     .map(renderExportedConstant)
     .join('\n')
 
-  const actionsCode = actions
+  const actionCreatorsCode = actions
     .map(renderActionCreator)
     .join('\n')
 
@@ -53,15 +58,24 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
   }
 
   if (lastActionCreatorExport) {
-    lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
+    lastActionCreatorExport.insertAfter(parser(actionCreatorsCode, {sourceType: 'module'}))
   }
 
   if (lastSwitchCaseStatement) {
     lastSwitchCaseStatement.insertBefore(casesCode)
   }
 
+  if (lastImportSpecifier) {
+    console.log('lastImportSpecifier', lastImportSpecifier);
+    const specifiers = actions.map(makeImportSpecifier)
+    lastImportSpecifier.insertAfter(specifiers)
+  }
+
   const newCode = generate(ast).code;
   return newCode
 }
+
+
+
 
 module.exports = addToExistingDuck;

@@ -28,6 +28,11 @@ exports.renderExportedConstant = (actionName) => {
   return `export const ${constantName} = '${constantName}'`;
 }
 
+exports.makeImportSpecifier = (actionName) => {
+  const identifier = t.identifier(changeCase.constantCase(actionName))
+  return t.importSpecifier(identifier, identifier)
+}
+
 exports.renderActionCreator = (actionName) => {
   const variableName = changeCase.camelCase(actionName);
   const constantName = changeCase.constantCase(actionName);
