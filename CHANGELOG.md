@@ -1,3 +1,6 @@
+#### 0.0.8
+- Better success messaging
+
 #### 0.0.7
 - Support for existing actions and reducer files
 
