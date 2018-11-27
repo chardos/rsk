@@ -2,7 +2,7 @@ const fs = require('fs');
 const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateDuckCode = require('./generateDuckCode');
-const addToExistingDuck = require('./addToExistingDuck');
+const addToExistingDuck = require('../helpers/modifyExistingReduxFile');
 
 module.exports = ({ srcPath, reducerName, actions }) => {
   const ducksDirectoryPath = `${srcPath}/ducks`;

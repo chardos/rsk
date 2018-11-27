@@ -5,10 +5,14 @@ const { renderExportedConstant, renderActionCreator, generateCaseObject } = requ
 const get = require('lodash.get');
 const t = require("@babel/types");
 
+/**
+ * modifyExistingReduxFile -
+ * This function will take any reducer, action, or duck file, and add
+ * the new actions to it.
+ */
+
 const addToExistingDuck = (reducerName, actions, existingFile) => {
   const ast = parser(existingFile, {sourceType: 'module'});
-
-  // TODO: GET THE NEW ACTIONS IN HERE.
 
   let lastConstantExport;
   let lastActionCreatorExport;
@@ -44,9 +48,17 @@ const addToExistingDuck = (reducerName, actions, existingFile) => {
 
   const casesCode = actions.map(generateCaseObject);
 
-  lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
-  lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
-  lastSwitchCaseStatement.insertBefore(casesCode)
+  if (lastConstantExport) {
+    lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
+  }
+
+  if (lastActionCreatorExport) {
+    lastActionCreatorExport.insertAfter(parser(actionsCode, {sourceType: 'module'}))
+  }
+
+  if (lastSwitchCaseStatement) {
+    lastSwitchCaseStatement.insertBefore(casesCode)
+  }
 
   const newCode = generate(ast).code;
   return newCode
