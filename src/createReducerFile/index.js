@@ -12,7 +12,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
     let reducerCode;
 
     if (fs.existsSync(reducerPath)) {
-      console.log(`${reducerName}.js exists.`)
+      console.log(`reducers/${reducerName}.js exists.`)
 
       const existingFile = fs.readFileSync(reducerPath).toString();
       reducerCode = modifyExistingReduxFile(reducerName, actions, existingFile);
