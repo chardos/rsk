@@ -1,3 +1,6 @@
+#### 0.0.7
+- Support for existing actions and reducer files
+
 #### 0.0.6
 - Support for existing ducks files
 
