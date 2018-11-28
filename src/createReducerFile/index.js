@@ -18,6 +18,7 @@ module.exports = async({ srcPath, reducerName, actions }) => {
     const existingFile = fs.readFileSync(reducerPath).toString();
     reducerCode = addActionsToReduxFile(reducerName, actions, existingFile);
   } else {
+    logger.success(`Creating reducers/${reducerName}.js`)
     reducerCode = generateReducerCode(reducerName, actions);
   }
 

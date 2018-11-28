@@ -19,6 +19,7 @@ module.exports = ({ srcPath, reducerName, actions }) => {
       const existingFile = fs.readFileSync(duckFilePath).toString();
       duckCode = addActionsToReduxFile(reducerName, actions, existingFile);
     } else {
+      logger.success(`Creating ducks/${reducerName}.js`)
       duckCode = generateDuckCode(reducerName, actions);
     }
     
