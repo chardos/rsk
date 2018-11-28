@@ -1,19 +1,16 @@
 const changeCase = require('change-case');
-const findUp = require('find-up');
 const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
+const setupStore = require('../commands/setup-store');
 const createComponentFile = require('../createComponentFile');
-const { SFC, CC, REDUCER } = require('../constants/commands');
+const { SFC, CC, REDUCER, SETUP_STORE } = require('../constants/commands');
 
 const parseCommand = async (obj) => {
   // console.log(obj);
-  const { config, command, positionalArgs } = obj;
-  const { codeDirectory, style } = config;
+  const { config, command, positionalArgs, srcPath } = obj;
+  const { style } = config;
 
-  const srcPath = await findUp(codeDirectory);
-
-  if (!srcPath) throw new Error(`Couldn't find a ${codeDirectory} directory in the your project.`);
   if (command === SFC || command === CC) {
     const [componentName] = positionalArgs;
     const pascalCaseName = changeCase.pascalCase(componentName);
@@ -24,6 +21,10 @@ const parseCommand = async (obj) => {
       command,
       config,
     });
+  }
+
+  if (command === SETUP_STORE) {
+    setupStore(obj)
   }
 
   if (command === REDUCER) {

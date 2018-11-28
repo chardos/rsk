@@ -1,4 +1,4 @@
-exports.renderSetupStore = (name, actions) => `
+module.exports = (name, actions) => `
   import { createStore, compose, combineReducers, applyMiddleware } from "redux";
   import reducers from './ducks';
 
