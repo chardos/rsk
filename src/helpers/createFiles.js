@@ -4,7 +4,7 @@ const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
 const createComponentFile = require('../createComponentFile');
-const { SFC, CC } = require('../constants/commands');
+const { SFC, CC, REDUCER } = require('../constants/commands');
 
 
 const createFiles = async (obj) => {
@@ -27,7 +27,7 @@ const createFiles = async (obj) => {
     });
   }
 
-  if (command === 'reducer') {
+  if (command === REDUCER) {
     const [reducerName, ...actions] = positionalArgs;
     if (style === 'rails') {
       await createReducerFile({ srcPath, reducerName, actions });

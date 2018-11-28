@@ -1,21 +1,21 @@
-const changeCase = require('change-case');
-
 exports.sfc = name => `
-    const ${name} = () => {
-      return <div>${name}</div>;
-    }
-    
-    export default ${name};
-  `;
+  import React from 'react';
+  
+  const ${name} = () => {
+    return <div>${name}</div>;
+  }
+  
+  export default ${name};
+`;
 
 exports.cc = name => `
-    import React from 'react';
+  import React from 'react';
 
-    class ${name} extends React.Component {
-      render() { 
-        return <div>${name}</div>;
-      }
+  class ${name} extends React.Component {
+    render() { 
+      return <div>${name}</div>;
     }
-    
-    export default ${name};
-  `;
+  }
+  
+  export default ${name};
+`;

@@ -21,6 +21,12 @@ rsk sfc <component name>
 rsk cc <component name>
 ```
 
+#### Creating connected redux components
+
+```
+Coming soon.
+```
+
 #### Redux
 
 ```
