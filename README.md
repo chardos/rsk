@@ -1,5 +1,7 @@
 # React Scaffold Kit
 
+[![npm version](https://img.shields.io/npm/v/rsk.svg?style=flat)](https://www.npmjs.com/package/rsk)
+
 A CLI tool for scaffolding react and redux applications
 
 ## Installation
