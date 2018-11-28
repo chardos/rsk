@@ -6,7 +6,7 @@ A CLI tool for scaffolding react and redux applications
 
 ## Installation
 
-`npm i -g rsk`
+`npm install -g rsk`
 
 ## Using it
 
@@ -26,10 +26,17 @@ rsk cc <component name>
 #### Creating connected redux components
 
 ```
-Coming soon.
+Coming soon:
+rsk sfc <component name> --actions <actions> --reducers <reducers>
 ```
 
 #### Redux
+
+Setting up the store
+
+```
+rsk create-store
+```
 
 ```
 rsk reducer <reducer name> <any number of action names>

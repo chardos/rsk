@@ -1,3 +1,6 @@
+#### 0.0.9
+- `rsk setup-store` command.
+
 #### 0.0.8
 - Better success messaging
 - Added import statement to the sfc render.

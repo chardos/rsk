@@ -2,14 +2,14 @@ const changeCase = require('change-case');
 const t = require("@babel/types");
 
 exports.renderSwitchStatement = (name, actions) => `
-    export default function ${name}(state = {}, action) {
-      switch (action.type) {
-        ${renderCases(actions)}
-        default:
-          return state;
-      }
+  export default function ${name}(state = {}, action) {
+    switch (action.type) {
+      ${renderCases(actions)}
+      default:
+        return state;
     }
-  `;
+  }
+`;
 
 exports.renderImports = (name, actions) => {
   const imports = actions
