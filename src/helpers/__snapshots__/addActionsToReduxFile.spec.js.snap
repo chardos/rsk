@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addActionsToReduxFile() on an action file Matches the old snapshot 1`] = `
+"export const ADD_ZONE = \\"ADD_ZONE\\";
+export const REMOVE_ZONE = \\"REMOVE_ZONE\\";
+
+export const addZone = () => {
+  return {
+    type: ADD_ZONE
+  };
+};
+export const removeZone = () => {
+  return {
+    type: REMOVE_ZONE
+  };
+};
+"
+`;
+
+exports[`addActionsToReduxFile() on an duck file Matches the old snapshot 1`] = `
+"export const ADD_ZONE = \\"ADD_ZONE\\";
+export const REMOVE_ZONE = \\"REMOVE_ZONE\\";
+
+export default function Zone(state = {}, action) {
+  switch (action.type) {
+    case ADD_ZONE:
+      return state;
+
+    case REMOVE_ZONE:
+      return state;
+
+    default:
+      return state;
+  }
+}
+export const addZone = () => {
+  return {
+    type: ADD_ZONE
+  };
+};
+export const removeZone = () => {
+  return {
+    type: REMOVE_ZONE
+  };
+};
+"
+`;
+
+exports[`addActionsToReduxFile() on an reducer file Matches the old snapshot 1`] = `
+"import { ADD_ZONE, REMOVE_ZONE } from \\"../actions/Zone\\";
+export default function Zone(state = {}, action) {
+  switch (action.type) {
+    case ADD_ZONE:
+      return state;
+
+    case REMOVE_ZONE:
+      return state;
+
+    default:
+      return state;
+  }
+}
+"
+`;

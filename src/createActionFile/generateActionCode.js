@@ -1,6 +1,6 @@
 const changeCase = require('change-case');
 
-function createActionCode(name, actions) {
+function generateActionCode(name, actions) {
   const constants = renderConstants(actions);
   const functions = renderFunctions(actions);
 
@@ -36,4 +36,4 @@ const renderFunctions = actions => (
     .join('\n')
 );
 
-module.exports = createActionCode;
+module.exports = generateActionCode;
