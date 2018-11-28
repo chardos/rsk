@@ -1,25 +1,26 @@
+const changeCase = require('change-case');
 const fs = require('fs');
-const prettier = require('prettier');
+const { prettify } = require('../utils');
 const makeDir = require('make-dir');
 const render = require('../renderers/react');
 
 module.exports = (obj) => {
-  console.log('obj', obj);
-  const { srcPath, componentName, command, config } = obj;
+  const { srcPath, command, config, positionalArgs } = obj;
   const { componentsDirectory } = config;
+
+  const componentName = changeCase.pascalCase(positionalArgs[0]);
   const componentPath = `${srcPath}/${componentsDirectory}/${componentName}`;
 
   makeDir(componentPath).then(() => {
+    // sdf
     const indexPath = `${componentPath}/index.js`;
     const actionCode = render[command](componentName);
-    const prettifiedCode = prettier.format(actionCode, { parser: 'babylon' });
+    const prettifiedCode = prettify(actionCode);
 
     fs.writeFile(indexPath, prettifiedCode, (err) => {
       if (err) {
-        console.error(err);
+        throw new Error(err);
       }
-
-      // file written successfully
     });
   });
 };
