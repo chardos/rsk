@@ -3,7 +3,8 @@ const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
 const setupStore = require('../commands/setup-store');
-const createComponentFile = require('../createComponentFile');
+const createComponentFile = require('../commands/sfc');
+const cc = require('../commands/cc');
 const { SFC, CC, REDUCER, SETUP_STORE } = require('../constants/commands');
 
 const parseCommand = async (obj) => {
@@ -11,15 +12,23 @@ const parseCommand = async (obj) => {
   const { config, command, positionalArgs, srcPath } = obj;
   const { style } = config;
 
-  if (command === SFC || command === CC) {
+  if (command === SFC) {
     const [componentName] = positionalArgs;
     const pascalCaseName = changeCase.pascalCase(componentName);
 
     await createComponentFile({
-      srcPath,
+      ...obj,
       componentName: pascalCaseName,
-      command,
-      config,
+    });
+  }
+
+  if (command === CC) {
+    const [componentName] = positionalArgs;
+    const pascalCaseName = changeCase.pascalCase(componentName);
+
+    await createComponentFile({
+      ...obj,
+      componentName: pascalCaseName,
     });
   }
 

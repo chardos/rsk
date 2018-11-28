@@ -9,6 +9,4 @@ module.exports = (obj) => {
   fs.writeFile(storePath, code, (err) => {
     if (err) console.error(err)
   });
-
-  // post it to the file src
 }

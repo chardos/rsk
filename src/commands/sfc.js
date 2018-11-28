@@ -3,9 +3,9 @@ const prettier = require('prettier');
 const makeDir = require('make-dir');
 const render = require('../renderers/react');
 
-module.exports = ({
-  srcPath, componentName, command, config,
-}) => {
+module.exports = (obj) => {
+  console.log('obj', obj);
+  const { srcPath, componentName, command, config } = obj;
   const { componentsDirectory } = config;
   const componentPath = `${srcPath}/${componentsDirectory}/${componentName}`;
 
