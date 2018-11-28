@@ -1,7 +1,7 @@
 const minimist = require('minimist');
 const findUp = require('find-up');
 const getConfig = require('./helpers/getConfig');
-const createFiles = require('./helpers/createFiles');
+const parseCommand = require('./helpers/parseCommand');
 const logger = require('./helpers/logger');
 const { COMMANDS } = require('./constants/commands');
 
@@ -18,7 +18,7 @@ module.exports = () => {
   findUp(CONFIG_FILE_NAME)
     .then(path => ({ path, command, positionalArgs }))
     .then(getConfig)
-    .then(createFiles)
+    .then(parseCommand)
     .catch(logger.error);
 
   // TODO: find the file with combine reducers in it

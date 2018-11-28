@@ -6,8 +6,7 @@ const createDuckFile = require('../createDuckFile');
 const createComponentFile = require('../createComponentFile');
 const { SFC, CC, REDUCER } = require('../constants/commands');
 
-
-const createFiles = async (obj) => {
+const parseCommand = async (obj) => {
   // console.log(obj);
   const { config, command, positionalArgs } = obj;
   const { codeDirectory, style } = config;
@@ -40,4 +39,4 @@ const createFiles = async (obj) => {
   }
 };
 
-module.exports = createFiles;
+module.exports = parseCommand;
