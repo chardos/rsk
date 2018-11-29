@@ -3,6 +3,7 @@ const fs = require('fs');
 const { prettify } = require('../utils');
 const makeDir = require('make-dir');
 const render = require('../renderers/react');
+const logger = require('../helpers/logger');
 
 module.exports = async (obj) => {
   const { srcPath, command, config, positionalArgs } = obj;
@@ -20,5 +21,6 @@ module.exports = async (obj) => {
     if (err) {
       throw new Error(err);
     }
+    logger.success(`components/${componentName}.js created.`)
   });
 };
