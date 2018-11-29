@@ -1,9 +1,10 @@
 #### 0.0.9
-- `rsk setup-store` command.
+- `rsk setup-store` command
+-  Logging warnings when dependencies missing
 
 #### 0.0.8
 - Better success messaging
-- Added import statement to the sfc render.
+- Added import statement to the sfc render
 
 #### 0.0.7
 - Support for existing actions and reducer files

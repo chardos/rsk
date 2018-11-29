@@ -1,13 +1,17 @@
 const detectInstalled = require('detect-installed');
 const logger = require('./logger');
-const { SETUP_STORE } = require('../constants/commands');
+const { REACT_COMMANDS, REDUX_COMMANDS } = require('../constants/commands');
 
 const warnMissingDependencies = async (obj) => {
-  console.log('obj', obj);
   const { command } = obj;
+  const reactInstalled = await detectInstalled('react', {local: true});
   const reduxInstalled = await detectInstalled('redux', {local: true});
 
-  if (command === SETUP_STORE && !reduxInstalled) {
+  if (REACT_COMMANDS.includes(command) && !reactInstalled) {
+    logger.warn('Warning: React is not installed. Run `npm install -S react`.');
+  }
+
+  if (REDUX_COMMANDS.includes(command) && !reduxInstalled) {
     logger.warn('Warning: Redux is not installed. Run `npm install -S redux`.');
   }
   
