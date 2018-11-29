@@ -1,8 +1,9 @@
+const Linter = require("eslint").Linter;
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
 const { renderExportedConstant, renderActionCreator, generateCaseObject, makeImportSpecifier } = require('../renderers/redux');
-const { checkHasDuplicates } = require('../utils');
+const { checkHasDuplicates, lint } = require('../utils');
 const get = require('lodash.get');
 const t = require("@babel/types");
 
@@ -76,11 +77,14 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
     const names = lastImportSpecifier.parent.specifiers.map(specifier => specifier.imported.name)
     const hasDuplicates = checkHasDuplicates(names);
     if (hasDuplicates) {
-      throw new Error(`Duplicate actions detected in import statement in ${reducerName}. You might be trying to add an action that already exists.`);
+      // throw new Error(`Duplicate actions detected in import statement in ${reducerName}. You might be trying to add an action that already exists.`);
     }
   }
   
   const newCode = generate(ast).code;
+
+  lint(newCode);
+
   return newCode
 }
 
