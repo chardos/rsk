@@ -20,7 +20,7 @@ const parseCommand = async (obj) => {
   }
 
   if (command === SETUP_STORE) {
-    setupStore(obj)
+    await setupStore(obj)
   }
 
   if (command === REDUCER) {

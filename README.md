@@ -35,7 +35,7 @@ rsk sfc <component name> --actions <actions> --reducers <reducers>
 Setting up the store
 
 ```
-rsk create-store
+rsk setup-store
 ```
 
 ```

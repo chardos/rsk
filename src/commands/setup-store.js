@@ -1,7 +1,7 @@
 const renderSetupStore = require('../renderers/redux/setupStore');
 const fs = require('fs');
 
-module.exports = (obj) => {
+module.exports = async (obj) => {
   const { srcPath } = obj;
   const storePath = `${srcPath}/store.js`;
   const code = renderSetupStore();
