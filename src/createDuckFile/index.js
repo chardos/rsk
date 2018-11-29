@@ -4,6 +4,7 @@ const makeDir = require('make-dir');
 const generateDuckCode = require('./generateDuckCode');
 const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
 const logger = require('../helpers/logger');
+const { lint } = require('../utils');
 
 module.exports = ({ srcPath, reducerName, actions }) => {
   const ducksDirectoryPath = `${srcPath}/ducks`;
@@ -24,6 +25,9 @@ module.exports = ({ srcPath, reducerName, actions }) => {
     }
     
     const prettifiedCode = prettier.format(duckCode, { parser: 'babylon' });
+
+    lint(prettifiedCode);
+
 
     fs.writeFile(duckFilePath, prettifiedCode, (err) => {
       if (err) {

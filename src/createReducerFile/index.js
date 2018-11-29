@@ -4,6 +4,7 @@ const makeDir = require('make-dir');
 const generateReducerCode = require('./generateReducerCode');
 const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
 const logger = require('../helpers/logger');
+const { lint } = require('../utils');
 
 module.exports = async({ srcPath, reducerName, actions }) => {
   const reducersPath = `${srcPath}/reducers`;
@@ -23,6 +24,8 @@ module.exports = async({ srcPath, reducerName, actions }) => {
   }
 
   const prettifiedCode = prettier.format(reducerCode, { parser: 'babylon' });
+
+  lint(prettifiedCode);
 
   fs.writeFile(reducerPath, prettifiedCode, (err) => {
     if (err) {

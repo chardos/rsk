@@ -82,7 +82,7 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
   }
   
   const newCode = generate(ast).code;
-
+  
   lint(newCode);
 
   return newCode
