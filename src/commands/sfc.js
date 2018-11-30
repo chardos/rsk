@@ -17,10 +17,12 @@ module.exports = async (obj) => {
   const actionCode = render[command](componentName);
   const prettifiedCode = prettify(actionCode);
 
-  fs.writeFile(indexPath, prettifiedCode, (err) => {
+  await fs.writeFile(indexPath, prettifiedCode, (err) => {
     if (err) {
       throw new Error(err);
     }
     logger.success(`components/${componentName}.js created.`)
   });
+
+  return prettifiedCode;
 };
