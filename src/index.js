@@ -10,7 +10,6 @@ const { COMMANDS } = require('./constants/commands');
 const CONFIG_FILE_NAME = '.rsk';
 
 module.exports = async () => {
-  console.log('process.argv', process.argv);
   const args = minimist(process.argv.slice(2));
   const commands = args._;
   const [command, ...positionalArgs] = commands;

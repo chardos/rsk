@@ -17,7 +17,7 @@ module.exports = async (obj) => {
   const actionCode = render[command](componentName);
   const prettifiedCode = prettify(actionCode);
 
-  await fs.writeFile(indexPath, prettifiedCode, (err) => {
+  fs.writeFile(indexPath, prettifiedCode, (err) => {
     if (err) {
       throw new Error(err);
     }

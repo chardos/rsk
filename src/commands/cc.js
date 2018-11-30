@@ -23,4 +23,6 @@ module.exports = async (obj) => {
     }
     logger.success(`components/${componentName}.js created.`)
   });
+
+  return prettifiedCode;
 };
