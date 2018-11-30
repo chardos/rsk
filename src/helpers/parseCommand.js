@@ -5,6 +5,7 @@ const createDuckFile = require('../createDuckFile');
 const setupStore = require('../commands/setup-store');
 const sfc = require('../commands/sfc');
 const cc = require('../commands/cc');
+const reducer = require('../commands/reducer');
 const { SFC, CC, REDUCER, SETUP_STORE } = require('../constants/commands');
 
 const parseCommand = async (obj) => {
@@ -24,15 +25,16 @@ const parseCommand = async (obj) => {
   }
 
   if (command === REDUCER) {
-    const [reducerName, ...actions] = positionalArgs;
-    if (style === 'rails') {
-      await createReducerFile({ srcPath, reducerName, actions });
-      await createActionFile({ srcPath, reducerName, actions });
-    }
+    await reducer(obj);
+    // const [reducerName, ...actions] = positionalArgs;
+    // if (style === 'rails') {
+    //   await createReducerFile({ srcPath, reducerName, actions });
+    //   await createActionFile({ srcPath, reducerName, actions });
+    // }
 
-    if (style === 'ducks') {
-      await createDuckFile({ srcPath, reducerName, actions });
-    }
+    // if (style === 'ducks') {
+    //   await createDuckFile({ srcPath, reducerName, actions });
+    // }
   }
 };
 
