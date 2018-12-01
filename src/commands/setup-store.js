@@ -9,4 +9,6 @@ module.exports = async (obj) => {
   fs.writeFile(storePath, code, (err) => {
     if (err) console.error(err)
   });
+
+  return code;
 }

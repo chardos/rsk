@@ -18,5 +18,3 @@ module.exports = async (obj) => {
     await createDuckFile({ srcPath, reducerName, actions });
   }
 }
-
-

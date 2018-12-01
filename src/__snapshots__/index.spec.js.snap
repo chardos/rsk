@@ -13,6 +13,22 @@ export default Potato;
 "
 `;
 
+exports[`When running rsk in the command line setup store should match the snapshot 1`] = `
+"
+  import { createStore, compose, combineReducers, applyMiddleware } from \\"redux\\";
+  import reducers from './ducks';
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const rootReducer = combineReducers(reducers);
+
+  const store = createStore(rootReducer, composeEnhancers(
+      applyMiddleware(thunk)
+  ));
+
+  export default store;
+"
+`;
+
 exports[`When running rsk in the command line stateless functional component should match the snapshot 1`] = `
 "import React from \\"react\\";
 
