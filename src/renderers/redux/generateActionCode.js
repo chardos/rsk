@@ -2,7 +2,7 @@ const changeCase = require('change-case');
 
 function generateActionCode(name, actions) {
   const constants = renderConstants(actions);
-  const functions = renderFunctions(actions);
+  const functions = renderActionCreators(actions);
 
   return `
     ${constants}  
@@ -19,7 +19,7 @@ const renderConstants = actions => (
     .join('\n')
 );
 
-const renderFunctions = actions => (
+const renderActionCreators = actions => (
   actions
     .map((actionName) => {
       const variableName = changeCase.camelCase(actionName);

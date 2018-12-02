@@ -1,4 +1,3 @@
-const Linter = require("eslint").Linter;
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;

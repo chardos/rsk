@@ -4,11 +4,9 @@ const { prettify } = require('../utils');
 
 module.exports = async (obj) => {
   const { srcPath, config: { style }, reducerFolder } = obj;
-  console.log('obj', obj);
-  console.log('reducerFolder', reducerFolder);
   const storePath = `${srcPath}/store.js`;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
-  const storeCode = renderSetupStore();
+  const storeCode = renderSetupStore(reducerFolder);
 
   const prettifiedStoreCode = prettify(storeCode);
 

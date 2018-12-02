@@ -1,6 +1,6 @@
-module.exports = (name, actions) => `
+module.exports = (reducerFolder) => `
   import { createStore, compose, combineReducers } from "redux";
-  import reducers from "./ducks";
+  import reducers from "./${reducerFolder}";
 
   const rootReducer = combineReducers(reducers);
 
