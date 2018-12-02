@@ -1,6 +1,7 @@
 const createReducerFile = require('../createReducerFile');
 const createActionFile = require('../createActionFile');
 const createDuckFile = require('../createDuckFile');
+// // const addToReducerIndex = require('../addToReducerIndex');
 
 const fs = require('fs');
 
@@ -12,6 +13,8 @@ module.exports = async (obj) => {
   if (style === 'rails') {
     await createReducerFile({ srcPath, reducerName, actions });
     await createActionFile({ srcPath, reducerName, actions });
+    // TODO:
+    // await addToReducerIndex({ srcPath, reducerName, actions });
   }
 
   if (style === 'ducks') {

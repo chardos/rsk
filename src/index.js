@@ -1,11 +1,11 @@
 const minimist = require('minimist');
 const findUp = require('find-up');
-const getConfig = require('./helpers/getConfig');
-const decorateData = require('./helpers/decorateData');
-const parseCommand = require('./helpers/parseCommand');
-const warnMissingDependencies = require('./helpers/warnMissingDependencies');
-const runValidations = require('./helpers/runValidations');
-const logger = require('./helpers/logger');
+const getConfig = require('./pipeline/getConfig');
+const decorateData = require('./pipeline/decorateData');
+const parseCommand = require('./pipeline/parseCommand');
+const warnMissingDependencies = require('./pipeline/warnMissingDependencies');
+const runValidations = require('./pipeline/runValidations');
+const logger = require('./pipeline/logger');
 const { COMMANDS } = require('./constants/commands');
 
 const CONFIG_FILE_NAME = '.rsk';

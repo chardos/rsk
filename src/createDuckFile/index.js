@@ -1,8 +1,8 @@
 const fs = require('fs');
 const makeDir = require('make-dir');
 const generateDuckCode = require('./generateDuckCode');
-const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
-const logger = require('../helpers/logger');
+const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
+const logger = require('../pipeline/logger');
 const { prettify, lint } = require('../utils');
 
 module.exports = ({ srcPath, reducerName, actions }) => {

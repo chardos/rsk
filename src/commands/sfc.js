@@ -3,7 +3,7 @@ const fs = require('fs');
 const { prettify } = require('../utils');
 const makeDir = require('make-dir');
 const render = require('../renderers/react');
-const logger = require('../helpers/logger');
+const logger = require('../pipeline/logger');
 
 module.exports = async (obj) => {
   const { srcPath, command, config, positionalArgs } = obj;

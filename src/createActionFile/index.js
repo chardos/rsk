@@ -2,8 +2,8 @@ const fs = require('fs');
 const prettier = require('prettier');
 const makeDir = require('make-dir');
 const generateActionCode = require('./generateActionCode');
-const addActionsToReduxFile = require('../helpers/addActionsToReduxFile');
-const logger = require('../helpers/logger');
+const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
+const logger = require('../pipeline/logger');
 const { lint } = require('../utils');
 
 module.exports = async ({ srcPath, reducerName, actions }) => {
