@@ -1,6 +1,6 @@
 const fs = require('fs');
 const makeDir = require('make-dir');
-const generateDuckCode = require('./generateDuckCode');
+const generateDuckCode = require('../renderers/redux/generateDuckCode');
 const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
 const logger = require('../pipeline/logger');
 const { prettify, lint } = require('../utils');

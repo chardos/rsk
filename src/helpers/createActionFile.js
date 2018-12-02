@@ -1,7 +1,7 @@
 const fs = require('fs');
 const prettier = require('prettier');
 const makeDir = require('make-dir');
-const generateActionCode = require('./generateActionCode');
+const generateActionCode = require('../renderers/redux/generateActionCode');
 const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
 const logger = require('../pipeline/logger');
 const { lint } = require('../utils');

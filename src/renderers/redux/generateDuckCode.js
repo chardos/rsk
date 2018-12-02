@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const { renderExportedConstant, renderSwitchStatement, renderActionCreator } = require('../renderers/redux');
+const { renderExportedConstant, renderSwitchStatement, renderActionCreator } = require('../redux');
 
 const renderExportedConstants = actions => (
   actions

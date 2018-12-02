@@ -1,6 +1,6 @@
-const createReducerFile = require('../createReducerFile');
-const createActionFile = require('../createActionFile');
-const createDuckFile = require('../createDuckFile');
+const createReducerFile = require('../helpers/createReducerFile');
+const createActionFile = require('../helpers/createActionFile');
+const createDuckFile = require('../helpers/createDuckFile');
 // // const addToReducerIndex = require('../addToReducerIndex');
 
 const fs = require('fs');
