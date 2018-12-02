@@ -1,6 +1,7 @@
 const minimist = require('minimist');
 const findUp = require('find-up');
 const getConfig = require('./helpers/getConfig');
+const decorateData = require('./helpers/decorateData');
 const parseCommand = require('./helpers/parseCommand');
 const warnMissingDependencies = require('./helpers/warnMissingDependencies');
 const runValidations = require('./helpers/runValidations');
@@ -21,6 +22,7 @@ module.exports = async () => {
     .then(path => ({ path, command, positionalArgs }))
     .then(warnMissingDependencies)
     .then(getConfig)
+    .then(decorateData)
     .then(runValidations)
     .then(parseCommand)
     .catch(logger.error);

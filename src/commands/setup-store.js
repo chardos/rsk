@@ -1,14 +1,27 @@
 const renderSetupStore = require('../renderers/redux/setupStore');
 const fs = require('fs');
+const { prettify } = require('../utils');
 
 module.exports = async (obj) => {
-  const { srcPath } = obj;
+  const { srcPath, config: { style }, reducerFolder } = obj;
+  console.log('obj', obj);
+  console.log('reducerFolder', reducerFolder);
   const storePath = `${srcPath}/store.js`;
-  const code = renderSetupStore();
+  const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
+  const storeCode = renderSetupStore();
 
-  fs.writeFile(storePath, code, (err) => {
+  const prettifiedStoreCode = prettify(storeCode);
+
+  // create an index file
+  const emptyReducersIndex = 'export default {}';
+
+  fs.writeFile(storePath, prettifiedStoreCode, (err) => {
     if (err) console.error(err)
   });
 
-  return code;
+  fs.writeFile(reducerIndexPath, emptyReducersIndex, (err) => {
+    if (err) console.error(err)
+  });
+
+  return storeCode;
 }
