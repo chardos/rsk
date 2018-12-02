@@ -1,3 +1,6 @@
+#### 0.0.10
+- Fix error when `{style: 'rails'}`
+
 #### 0.0.9
 - `rsk setup-store` command
 -  Logging warnings when dependencies missing
