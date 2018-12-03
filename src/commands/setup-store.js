@@ -13,6 +13,13 @@ module.exports = async (obj) => {
   // create an index file
   const emptyReducersIndex = 'export default {}';
 
+  // Check for existing store.
+  const storeExists = fs.existsSync(storePath);
+
+  if (storeExists) {
+    throw new Error(`Sorry, new store can't be created. A store already exists at ${storePath}.`)
+  }
+
   fs.writeFile(storePath, prettifiedStoreCode, (err) => {
     if (err) throw new Error(`Setup store write error: ${err}`)
   });
