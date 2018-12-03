@@ -19,7 +19,5 @@ module.exports = async (data) => {
     await createDuckFile({ srcPath, reducerName, actions });
   }
   
-  if (!reducerExists) {
-    await addToReducerIndex(data);
-  }
+  await addToReducerIndex(data);
 }

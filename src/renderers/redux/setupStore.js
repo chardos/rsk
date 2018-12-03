@@ -1,5 +1,5 @@
 module.exports = (reducerFolder) => `
-  import { createStore, compose, combineReducers } from "redux";
+  import { createStore, combineReducers } from "redux";
   import reducers from "./${reducerFolder}";
 
   const rootReducer = combineReducers(reducers);
