@@ -8,6 +8,7 @@ const runValidations = require('./pipeline/runValidations');
 const logger = require('./pipeline/logger');
 const { COMMANDS } = require('./constants/commands');
 
+
 const CONFIG_FILE_NAME = '.rsk';
 
 module.exports = async () => {
