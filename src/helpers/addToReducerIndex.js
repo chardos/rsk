@@ -5,6 +5,7 @@ const generate = require('@babel/generator').default;
 const logger = require('../pipeline/logger');
 const { lint } = require('../utils');
 const { prettify } = require('../utils');
+const t = require("@babel/types");
 
 module.exports = async (data) => {
   const { srcPath, reducerFolder, positionalArgs } = data;
@@ -24,17 +25,9 @@ module.exports = async (data) => {
       },
 
       ObjectExpression(path) {
-        // const init = get(path, 'node.declaration.declarations.0.init');
-        // const isArrowFn = t.isArrowFunctionExpression(init);
-        // const isStringLiteral = t.isStringLiteral(init);
-  
-        // if (isStringLiteral) {
-        //   lastConstantExport = path;
-        // }
-        
-        // if (isArrowFn) {
-        //   lastActionCreatorExport = path;
-        // }
+        const properties = path.parent.declaration.properties
+        const id = t.identifier(reducerName)
+        properties.push(t.objectProperty(id, id))
       },
     })
 
