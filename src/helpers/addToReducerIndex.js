@@ -27,7 +27,7 @@ module.exports = async (data) => {
       ObjectExpression(path) {
         const properties = path.parent.declaration.properties
         const id = t.identifier(reducerName)
-        properties.push(t.objectProperty(id, id))
+        properties.push(t.objectProperty(id, id, false, true))
       },
     })
 
