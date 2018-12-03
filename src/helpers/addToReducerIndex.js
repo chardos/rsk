@@ -11,8 +11,9 @@ module.exports = async (data) => {
   const { srcPath, reducerFolder, positionalArgs } = data;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const reducerName = positionalArgs[0];
+  const reducerIndexExists = fs.existsSync(reducerIndexPath);
 
-  if (fs.existsSync(reducerIndexPath)) {
+  if (reducerIndexExists) {
     logger.success(`${reducerFolder}/index.js exists. Adding reducer: ${reducerName}`)
 
     const existingFile = fs.readFileSync(reducerIndexPath).toString();
@@ -38,9 +39,9 @@ module.exports = async (data) => {
     lint(prettifiedCode);
 
     fs.writeFile(reducerIndexPath, prettifiedCode, (err) => {
-      if (err) console.error(err)
+      if (err) throw new Error(`addToReducerIndex.js write error: ${err}`)
     });
   } else {
-    logger.error(`Sorry, we couldn't find an index.js in your /${reducerFolder} folder.`)
+    throw new Error(`Sorry, we couldn't find an index.js in your /${reducerFolder} folder.`)
   }  
 };

@@ -28,8 +28,6 @@ module.exports = async({ srcPath, reducerName, actions }) => {
   lint(prettifiedCode);
 
   fs.writeFile(reducerPath, prettifiedCode, (err) => {
-    if (err) {
-      console.error(err);
-    }
+    if (err) console.error(`createReducerFile.js write error: ${err}`)
   });
 };

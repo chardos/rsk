@@ -1,3 +1,6 @@
+#### 0.0.11
+- Fixed errors that weren't being logged properly
+
 #### 0.0.10
 - Fix error when `{style: 'rails'}`
 

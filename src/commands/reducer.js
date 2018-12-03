@@ -6,7 +6,7 @@ const addToReducerIndex = require('../helpers/addToReducerIndex');
 const fs = require('fs');
 
 module.exports = async (data) => {
-  const { config, command, positionalArgs, srcPath } = data;
+  const { config, command, positionalArgs, srcPath, reducerExists } = data;
   const { style } = config;
   const [reducerName, ...actions] = positionalArgs;
   
@@ -18,6 +18,8 @@ module.exports = async (data) => {
   if (style === 'ducks') {
     await createDuckFile({ srcPath, reducerName, actions });
   }
-
-  await addToReducerIndex(data);
+  
+  if (!reducerExists) {
+    await addToReducerIndex(data);
+  }
 }

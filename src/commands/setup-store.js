@@ -14,11 +14,11 @@ module.exports = async (obj) => {
   const emptyReducersIndex = 'export default {}';
 
   fs.writeFile(storePath, prettifiedStoreCode, (err) => {
-    if (err) console.error(err)
+    if (err) throw new Error(`Setup store write error: ${err}`)
   });
 
   fs.writeFile(reducerIndexPath, emptyReducersIndex, (err) => {
-    if (err) console.error(err)
+    if (err) throw new Error(`Setup store write error: ${err}`)
   });
 
   return storeCode;

@@ -22,8 +22,8 @@ module.exports = async () => {
     .then(path => ({ path, command, positionalArgs }))
     .then(warnMissingDependencies)
     .then(getConfig)
-    .then(decorateData)
     .then(runValidations)
+    .then(decorateData)
     .then(parseCommand)
     .catch(logger.error);
 };
