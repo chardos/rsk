@@ -1,8 +1,8 @@
 const commands = require('../commands');
 
-const parseCommand = async (obj) => {
-  const { command } = obj;
-  return await commands[command](obj);
+const parseCommand = async (data) => {
+  const { command } = data;
+  return await commands[command](data);
 };
 
 module.exports = parseCommand;

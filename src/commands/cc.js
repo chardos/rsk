@@ -5,8 +5,8 @@ const render = require('../renderers/react');
 const { prettify } = require('../utils');
 const logger = require('../pipeline/logger');
 
-module.exports = async (obj) => {
-  const { srcPath, command, config, positionalArgs } = obj;
+module.exports = async (data) => {
+  const { srcPath, command, config, positionalArgs } = data;
   const { componentsDirectory } = config;
 
   const componentName = changeCase.pascalCase(positionalArgs[0]);

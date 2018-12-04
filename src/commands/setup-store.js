@@ -2,8 +2,8 @@ const renderSetupStore = require('../renderers/redux/setupStore');
 const fs = require('fs');
 const { prettify } = require('../utils');
 
-module.exports = async (obj) => {
-  const { srcPath, config: { style }, reducerFolder } = obj;
+module.exports = async (data) => {
+  const { srcPath, config: { style }, reducerFolder } = data;
   const storePath = `${srcPath}/store.js`;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const storeCode = renderSetupStore(reducerFolder);
@@ -19,6 +19,12 @@ module.exports = async (obj) => {
   if (storeExists) {
     throw new Error(`Sorry, new store can't be created. A store already exists at ${storePath}.`)
   }
+
+  // Look for existing reducers, and add if any.
+  // 1. Check if .rsk file has a location.
+  // 2. Check under both names, /reducers and /ducks
+  // 3. Check codebase for "combineReducers" ?
+  // 3. "Found a reducers folder at ${path}". Adding to your .rsk"
 
   fs.writeFile(storePath, prettifiedStoreCode, (err) => {
     if (err) throw new Error(`Setup store write error: ${err}`)

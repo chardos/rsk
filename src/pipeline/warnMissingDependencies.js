@@ -2,8 +2,8 @@ const detectInstalled = require('detect-installed');
 const logger = require('./logger');
 const { REACT_COMMANDS, REDUX_COMMANDS } = require('../constants/commands');
 
-const warnMissingDependencies = async (obj) => {
-  const { command } = obj;
+const warnMissingDependencies = async (data) => {
+  const { command } = data;
   const reactInstalled = await detectInstalled('react', {local: true});
   const reduxInstalled = await detectInstalled('redux', {local: true});
 
@@ -15,7 +15,7 @@ const warnMissingDependencies = async (obj) => {
     logger.warn('Warning: Redux is not installed. Run `npm install -S redux`.');
   }
   
-  return obj;
+  return data;
 };
 
 module.exports = warnMissingDependencies;

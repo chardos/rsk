@@ -38,8 +38,16 @@ Setting up the store
 rsk setup-store
 ```
 
+Adding a reducer
+
 ```
 rsk reducer <reducer name> <any number of action names>
+```
+
+Connecting a component
+
+```
+rsk connect <component name> <any number of reducer names>
 ```
 
 ## Config

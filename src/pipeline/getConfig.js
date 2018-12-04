@@ -6,8 +6,8 @@ const defaultConfig = {
   componentsDirectory: 'components',
 };
 
-const getConfig = (obj) => {
-  const { path } = obj;
+const getConfig = (data) => {
+  const { path } = data;
 
   return new Promise((resolve) => {
     if (path) {
@@ -19,13 +19,13 @@ const getConfig = (obj) => {
         };
 
         resolve({
-          ...obj,
+          ...data,
           config: mergedConfig,
         });
       });
     } else {
       resolve({
-        ...obj,
+        ...data,
         config: defaultConfig,
       });
     }
