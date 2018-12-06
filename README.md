@@ -44,11 +44,49 @@ Adding a reducer
 rsk reducer <reducer name> <any number of action names>
 ```
 
-Connecting a component
+## Connecting a component
 
 ```
-rsk connect <component name> <any number of reducer names>
+rsk connect <component name> <...reducer names>
 ```
+
+Example:
+
+```
+rsk connect Sports volleyball soccer 
+```
+Turns this:
+
+```
+import React from "react";
+
+const Sports = (props) => {
+  return <div>Sports</div>;
+};
+
+export default Sports;
+```
+
+Into this:
+
+```diff
+  import React from "react";
++ import { connect } from "react-redux";
+  
+  const Sports = (props) => {
+    return <div>Sports</div>;
+  };
+
++ const mapStateToProps = ({ volleyball, soccer }) => ({
++   volleyball,
++   soccer
++ });
+
+- export default Sports;
++ export default connect(mapStateToProps)(Sports);
+```
+
+
 
 ## Config
 
