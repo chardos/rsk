@@ -4,56 +4,95 @@
 
 A CLI tool for scaffolding react and redux applications
 
-## Installation
+# Installation
 
 `npm install -g rsk`
 
-## Using it
+# React commands
 
-
-#### React Stateless Component
+## React Stateless Component
 
 ```
 rsk sfc <component name>
 ```
 
-#### React Class Component
+## React Class Component
 
 ```
 rsk cc <component name>
 ```
 
-#### Creating connected redux components
+# Redux commands
 
-```
-Coming soon:
-rsk sfc <component name> --actions <actions> --reducers <reducers>
-```
-
-#### Redux
-
-Setting up the store
+## Setting up the store
 
 ```
 rsk setup-store
 ```
 
-Adding a reducer
+## Adding a reducer
 
 ```
-rsk reducer <reducer name> <any number of action names>
-```
-
-## Connecting a component
-
-```
-rsk connect <component name> <...reducer names>
+rsk reducer <reducer name> <...reducernames>
 ```
 
 Example:
 
 ```
-rsk connect Sports volleyball soccer 
+rsk reducer volleyball add-score remove-score
+```
+
+Results in:
+
+*actions/volleyball.js*
+```
+export const ADD_SCORE = "ADD_SCORE";
+export const REMOVE_SCORE = "REMOVE_SCORE";
+
+export const addScore = () => {
+  return {
+    type: ADD_SCORE
+  };
+};
+
+export const removeScore = () => {
+  return {
+    type: REMOVE_SCORE
+  };
+};
+
+
+```
+
+*reducers/volleyball.js*
+```
+import { ADD_SCORE, REMOVE_SCORE } from "../actions/volleyball";
+
+export default function volleyball(state = {}, action) {
+  switch (action.type) {
+    case ADD_SCORE:
+      return state;
+
+    case REMOVE_SCORE:
+      return state;
+
+    default:
+      return state;
+  }
+}
+
+```
+
+## Connecting a component
+
+```
+rsk connect <component name> <...reducernames>
+```
+
+Example:
+
+```
+rsk connect Sports volleyball soccer
 ```
 Turns this:
 
@@ -88,7 +127,7 @@ Into this:
 
 
 
-## Config
+# Config
 
 React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
 
