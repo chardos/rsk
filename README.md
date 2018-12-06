@@ -72,8 +72,6 @@ export const removeScore = () => {
     type: REMOVE_SCORE
   };
 };
-
-
 ```
 
 *reducers/volleyball.js*
@@ -92,7 +90,6 @@ export default function volleyball(state = {}, action) {
       return state;
   }
 }
-
 ```
 
 ### Connecting a component
