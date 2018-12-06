@@ -1,21 +1,21 @@
-exports.sfc = name => `
+exports.sfc = componentName => `
   import React from 'react';
   
-  const ${name} = () => {
-    return <div>${name}</div>;
+  const ${componentName} = () => {
+    return <div>${componentName}</div>;
   }
   
-  export default ${name};
+  export default ${componentName};
 `;
 
-exports.cc = name => `
+exports.cc = componentName => `
   import React from 'react';
 
-  class ${name} extends React.Component {
+  class ${componentName} extends React.Component {
     render() { 
-      return <div>${name}</div>;
+      return <div>${componentName}</div>;
     }
   }
   
-  export default ${name};
+  export default ${componentName};
 `;

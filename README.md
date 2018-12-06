@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/rsk.svg?style=flat)](https://www.npmjs.com/package/rsk)
 
-A CLI tool for scaffolding react and redux applications
+A CLI tool for scaffolding react and redux applications.
 
 ## Installation
 
@@ -145,6 +145,28 @@ React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your
 module.exports = {
   style: 'ducks',
   codeDirectory: 'src',
-  componentsDirectory: 'components'
+  componentsDirectory: 'components',
+  template: {
+    sfc: (componentName) => `
+      import React from 'react';
+      
+      const ${componentName} = () => {
+        return <div>Some random text</div>;
+      }
+      
+      export default ${componentName};
+    `,
+    cc: (componentName) => `
+      import React from 'react';
+
+      class ${componentName} extends React.Component {
+        render() { 
+          return <div>Some random text</div>
+        }
+      }
+      
+      export default ${componentName};
+    `
+  }
 }
 ```
