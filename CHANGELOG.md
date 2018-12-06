@@ -1,3 +1,7 @@
+#### 0.0.12
+- Added `connect` command.
+- Use a .rsk.js instead of .rsk
+
 #### 0.0.11
 - Fixed errors that weren't being logged properly
 
