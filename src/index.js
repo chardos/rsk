@@ -9,7 +9,7 @@ const logger = require('./pipeline/logger');
 const { COMMANDS } = require('./constants/commands');
 
 
-const CONFIG_FILE_NAME = '.rsk';
+const CONFIG_FILE_NAME = '.rsk.js';
 
 module.exports = async () => {
   const args = minimist(process.argv.slice(2));
@@ -20,7 +20,7 @@ module.exports = async () => {
   }
 
   return await findUp(CONFIG_FILE_NAME)
-    .then(path => ({ path, command, positionalArgs }))
+    .then(configPath => ({ configPath, command, positionalArgs }))
     .then(warnMissingDependencies)
     .then(getConfig)
     .then(runValidations)

@@ -7,29 +7,19 @@ const defaultConfig = {
 };
 
 const getConfig = (data) => {
-  const { path } = data;
+  const { configPath } = data;
 
-  return new Promise((resolve) => {
-    if (path) {
-      fs.readFile(path, 'utf8', (err, contents) => {
-        const userConfig = JSON.parse(contents);
-        const mergedConfig = {
-          ...defaultConfig,
-          ...userConfig,
-        };
+  const userConfig = configPath
+    ? require(configPath)
+    : {};
 
-        resolve({
-          ...data,
-          config: mergedConfig,
-        });
-      });
-    } else {
-      resolve({
-        ...data,
-        config: defaultConfig,
-      });
+  return {
+    ...data,
+    config: {
+      ...defaultConfig,
+      ...userConfig
     }
-  });
+  }
 };
 
 module.exports = getConfig;

@@ -52,12 +52,12 @@ rsk connect <component name> <any number of reducer names>
 
 ## Config
 
-React Scaffold Kit can be configured using a `.rsk` file. Just add it to your root folder.
+React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
 
 ```
-{
-  "style": "ducks",
-  "codeDirectory": "src",
-  "componentsDirectory": "components"
+module.exports = {
+  style: 'ducks',
+  codeDirectory: 'src',
+  componentsDirectory: 'components'
 }
 ```
