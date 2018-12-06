@@ -4,33 +4,45 @@
 
 A CLI tool for scaffolding react and redux applications
 
-# Installation
+## Installation
 
-`npm install -g rsk`
+```
+npm install -g rsk
+```
 
-# React commands
+## Notes
 
-## React Stateless Component
+All command line arguments can use any type of casing. The following are all equivalent, and will result in a component called `ExampleComponent`.
+
+- `rsk sfc ExampleComponent`
+
+- `rsk sfc example-component`
+
+- `rsk sfc exampleComponent`
+
+## React commands
+
+### React Stateless Component
 
 ```
 rsk sfc <component name>
 ```
 
-## React Class Component
+### React Class Component
 
 ```
 rsk cc <component name>
 ```
 
-# Redux commands
+## Redux commands
 
-## Setting up the store
+### Setting up the store
 
 ```
 rsk setup-store
 ```
 
-## Adding a reducer
+### Adding a reducer
 
 ```
 rsk reducer <reducer name> <...reducernames>
@@ -83,7 +95,7 @@ export default function volleyball(state = {}, action) {
 
 ```
 
-## Connecting a component
+### Connecting a component
 
 ```
 rsk connect <component name> <...reducernames>
@@ -125,9 +137,7 @@ Into this:
 + export default connect(mapStateToProps)(Sports);
 ```
 
-
-
-# Config
+## Config
 
 React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
 
