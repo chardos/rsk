@@ -61,4 +61,3 @@ React Scaffold Kit can be configured using a `.rsk` file. Just add it to your ro
   "componentsDirectory": "components"
 }
 ```
-

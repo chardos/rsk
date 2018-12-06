@@ -3,5 +3,5 @@ module.exports = {
   reducer: require('./reducer'),
   sfc: require('./sfc'),
   'setup-store': require('./setup-store'),
-  'connect': require('./connect'),
+  connect: require('./connect'),
 }

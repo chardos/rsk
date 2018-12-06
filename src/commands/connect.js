@@ -1,12 +1,14 @@
 const fs = require('fs');
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
-const render = require('../renderers/react');
+const { renderConnectedDefaultExport } = require('../renderers/redux');
 const { parse, prettify, lint } = require('../utils');
 const logger = require('../pipeline/logger');
 
 module.exports = async (data) => {
-  const { componentPath } = data;
+  logger.log('data', data);
+
+  const { componentPath, reducerNames } = data;
   
   const componentExists = fs.existsSync(componentPath);
 
@@ -38,11 +40,10 @@ module.exports = async (data) => {
   `))
 
   exportDefaultPath.replaceWith(
-    parse(`
-      const mapStateToProps = (state) => state
-
-      export default connect(mapStateToProps)(${declarationName})
-    `)
+    parse(renderConnectedDefaultExport({
+      componentName: declarationName,
+      reducerNames
+    }))
   )
 
   const newCode = generate(ast).code;
@@ -54,5 +55,4 @@ module.exports = async (data) => {
   fs.writeFile(componentPath, prettifiedCode, (err) => {
     if (err) throw new Error(err)
   });
-
 };

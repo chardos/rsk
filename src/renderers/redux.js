@@ -46,6 +46,14 @@ exports.renderActionCreator = (actionName) => {
   `;
 }
 
+exports.renderConnectedDefaultExport = ({componentName, reducerNames}) => {
+  const reducersJoined = reducerNames.join(',')
+  return `
+    const mapStateToProps = ({${reducersJoined}}) => ({${reducersJoined}})
+
+    export default connect(mapStateToProps)(${componentName})
+  `
+}
 
 const renderCases = (actions) => {
   const cases = actions.map(renderCase);
