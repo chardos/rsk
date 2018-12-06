@@ -1,4 +1,4 @@
-#### 0.0.12
+#### 0.1.0
 - Added `connect` command.
 - Use a .rsk.js instead of .rsk
 
