@@ -17,12 +17,12 @@ module.exports = async (data) => {
     const existingFile = fs.readFileSync(reducerIndexPath).toString();
     const ast = parser(existingFile, {sourceType: 'module'});
     let existingReducers = [];
-    let exportDefaultPath;
+    let lastImport;
     let properties;
 
     traverse(ast, {
-      ExportDefaultDeclaration(path) {
-        exportDefaultPath = path;
+      ImportDeclaration(path) {
+        lastImport = path;
       },
 
       Property(path) {
@@ -41,7 +41,7 @@ module.exports = async (data) => {
 
       // add import
       const importCode = `import ${reducerName} from './${reducerName}'`;
-      exportDefaultPath.insertBefore(parser(importCode, {sourceType: 'module'}));
+      lastImport.insertAfter(parser(importCode, {sourceType: 'module'}));
 
       // add export
       const id = t.identifier(reducerName)
