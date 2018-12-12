@@ -1,3 +1,6 @@
+#### 1.0.2
+- Add -v and --version options
+
 #### 1.0.1
 - Add eslint to dependencies
 

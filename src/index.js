@@ -6,21 +6,20 @@ const parseCommand = require('./pipeline/parseCommand');
 const warnMissingDependencies = require('./pipeline/warnMissingDependencies');
 const runValidations = require('./pipeline/runValidations');
 const logger = require('./pipeline/logger');
-const { COMMANDS } = require('./constants/commands');
 
 
 const CONFIG_FILE_NAME = '.rsk.js';
 
 module.exports = async () => {
   const args = minimist(process.argv.slice(2));
-  const commands = args._;
+  const { 
+    _: commands,
+    ...options
+  } = args;
   const [command, ...positionalArgs] = commands;
-  if (!COMMANDS.includes(command)) {
-    throw new Error(`${command} is not a valid command.`);
-  }
 
   return await findUp(CONFIG_FILE_NAME)
-    .then(configPath => ({ configPath, command, positionalArgs }))
+    .then(configPath => ({ configPath, command, positionalArgs, options }))
     .then(warnMissingDependencies)
     .then(getConfig)
     .then(runValidations)
