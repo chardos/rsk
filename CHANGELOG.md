@@ -1,3 +1,6 @@
+#### 1.0.1
+- Add eslint to dependencies
+
 #### 1.0.0
 - Support `sfc` and `cc` templates in config.
 
