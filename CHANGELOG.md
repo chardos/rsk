@@ -1,3 +1,6 @@
+#### 1.0.3
+- Fix bug where `rsk reducer` errors if no reducers imported in reducer index.
+
 #### 1.0.2
 - Add -v and --version options
 - Fixed bug in `setup-store` where error occurred when if the reducer directory didn't exist

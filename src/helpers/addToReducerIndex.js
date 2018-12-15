@@ -21,8 +21,8 @@ module.exports = async (data) => {
     let properties;
 
     traverse(ast, {
-      ImportDeclaration(path) {
-        lastImport = path;
+      ExportDefaultDeclaration(path) {
+        exportDefaultPath = path;
       },
 
       Property(path) {
@@ -41,7 +41,7 @@ module.exports = async (data) => {
 
       // add import
       const importCode = `import ${reducerName} from './${reducerName}'`;
-      lastImport.insertAfter(parser(importCode, {sourceType: 'module'}));
+      exportDefaultPath.insertBefore(parser(importCode, {sourceType: 'module'}));
 
       // add export
       const id = t.identifier(reducerName)
