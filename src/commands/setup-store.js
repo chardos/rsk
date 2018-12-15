@@ -1,10 +1,13 @@
 const renderSetupStore = require('../renderers/redux/setupStore');
 const fs = require('fs');
 const { prettify } = require('../utils');
+const makeDir = require('make-dir');
+const logger = require('../pipeline/logger');
 
 module.exports = async (data) => {
   const { srcPath, config: { style }, reducerFolder } = data;
   const storePath = `${srcPath}/store.js`;
+  const reducerDirectoryPath = `${srcPath}/${reducerFolder}`;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const storeCode = renderSetupStore(reducerFolder);
 
@@ -28,10 +31,14 @@ module.exports = async (data) => {
 
   fs.writeFile(storePath, prettifiedStoreCode, (err) => {
     if (err) throw new Error(`Setup store write error: ${err}`)
+    logger.success(`${storePath} created.`)
   });
+  
 
+  await makeDir(reducerDirectoryPath);
   fs.writeFile(reducerIndexPath, emptyReducersIndex, (err) => {
     if (err) throw new Error(`Setup store write error: ${err}`)
+    logger.success(`${reducerIndexPath} created.`)
   });
 
   return storeCode;
