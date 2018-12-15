@@ -1,5 +1,6 @@
 #### 1.0.2
 - Add -v and --version options
+- Fixed bug in `setup-store` where error occurred when if the reducer directory didn't exist
 
 #### 1.0.1
 - Add eslint to dependencies
