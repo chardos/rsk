@@ -13,8 +13,6 @@ const getConfig = (data) => {
     ? require(configPath)
     : {};
 
-  console.log('userConfig', userConfig);
-  console.log('options', options);
   return {
     ...data,
     config: {

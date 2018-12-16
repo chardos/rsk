@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`When running rsk in the command line stateless functional component should match the snapshot 1`] = `
+"import React from \\"react\\";
+
+const Potato = () => {
+  return <div>Potato</div>;
+};
+
+export default Potato;
+"
+`;
