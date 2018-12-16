@@ -1,8 +1,8 @@
 const { prettify } = require('../utils');
 const addActionsToReduxFile = require('./addActionsToReduxFile');
-const generateActionCode = require('../createActionFile/generateActionCode');
-const generateReducerCode = require('../createReducerFile/generateReducerCode');
-const generateDuckCode = require('../createDuckFile/generateDuckCode');
+const generateActionCode = require('../renderers/redux/generateActionCode');
+const generateReducerCode = require('../renderers/redux/generateReducerCode');
+const generateDuckCode = require('../renderers/redux/generateDuckCode');
 
 describe('addActionsToReduxFile()', () => {
   describe('on an action file', () => {

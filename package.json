@@ -13,6 +13,9 @@
   },
   "author": "Richard Tan",
   "license": "ISC",
+  "jest": {
+    "watchPathIgnorePatterns": ["./tmp"]
+  },
   "dependencies": {
     "@babel/generator": "7.1.6",
     "@babel/parser": "7.1.6",
