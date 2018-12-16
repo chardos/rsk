@@ -1,6 +1,8 @@
 const rsk = require('./index.js');
 const fs = require('fs');
+const makeDir = require('make-dir');
 
+makeDir('tmp');
 jest.spyOn(fs, 'writeFile').mockReturnValue(Promise.resolve(null));
 
 describe('When running rsk in the command line', () => {
@@ -9,7 +11,7 @@ describe('When running rsk in the command line', () => {
   });
 
   it('stateless functional component should match the snapshot', async () => {
-    process.argv.push('sfc', 'potato');
+    process.argv.push('sfc', 'potato', '--codeDirectory=tmp');
     const output = await rsk();
     expect(output).toMatchSnapshot()
   });
