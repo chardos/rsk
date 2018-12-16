@@ -3,6 +3,9 @@ const logger = require('./logger');
 const { REACT_COMMANDS, REDUX_COMMANDS } = require('../constants/commands');
 
 const warnMissingDependencies = async (data) => {
+  // return early if debug mode
+  if (process.env.DEBUG) { return data };
+  
   const { command } = data;
   const reactInstalled = await detectInstalled('react', {local: true});
   const reduxInstalled = await detectInstalled('redux', {local: true});

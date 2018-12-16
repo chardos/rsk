@@ -7,17 +7,20 @@ const defaultConfig = {
 };
 
 const getConfig = (data) => {
-  const { configPath } = data;
+  const { configPath, options } = data;
 
   const userConfig = configPath
     ? require(configPath)
     : {};
 
+  console.log('userConfig', userConfig);
+  console.log('options', options);
   return {
     ...data,
     config: {
       ...defaultConfig,
-      ...userConfig
+      ...userConfig,
+      ...options
     }
   }
 };

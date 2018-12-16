@@ -19,10 +19,4 @@ describe('When running rsk in the command line', () => {
     const output = await rsk();
     expect(output).toMatchSnapshot()
   });
-
-  it('setup store should match the snapshot', async () => {
-    process.argv.push('setup-store');
-    const output = await rsk();
-    expect(output).toMatchSnapshot()
-  });
 })
