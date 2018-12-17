@@ -14,19 +14,21 @@ describe('When running rsk in the command line', () => {
     await del(`${tmpPath}/*`);
   })
 
-  it('setup-store should create store.js and match the snapshot', async () => {
-    process.argv.push('setup-store', '--codeDirectory=tmp');
-    await rsk();
-    const output = await fs.readFile(`${tmpPath}/store.js`);
-
-    expect(output.toString()).toMatchSnapshot()
-  });
-
-  it('setup-store should create reducer/index.js and match the snapshot', async () => {
-    process.argv.push('setup-store', '--codeDirectory=tmp');
-    await rsk();
-    const output = await fs.readFile(`${tmpPath}/reducers/index.js`);
-
-    expect(output.toString()).toMatchSnapshot()
-  });
+  describe('When store.js does not already exist', () => {
+    it('setup-store command should create store.js and match the snapshot', async () => {
+      process.argv.push('setup-store', '--codeDirectory=tmp');
+      await rsk();
+      const output = await fs.readFile(`${tmpPath}/store.js`);
+  
+      expect(output.toString()).toMatchSnapshot()
+    });
+  
+    it('setup-store should create reducer/index.js and match the snapshot', async () => {
+      process.argv.push('setup-store', '--codeDirectory=tmp');
+      await rsk();
+      const output = await fs.readFile(`${tmpPath}/reducers/index.js`);
+  
+      expect(output.toString()).toMatchSnapshot()
+    });
+  })
 })

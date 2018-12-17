@@ -6,8 +6,6 @@ const { parse, prettify, lint } = require('../utils');
 const logger = require('../pipeline/logger');
 
 module.exports = async (data) => {
-  logger.log('data', data);
-
   const { componentPath, reducerNames } = data;
   
   const componentExists = fs.existsSync(componentPath);

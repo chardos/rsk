@@ -8,7 +8,6 @@ const { prettify } = require('../utils');
 const t = require("@babel/types");
 
 module.exports = async (data) => {
-  logger.log('data', data);
   const { srcPath, reducerFolder, positionalArgs, reducerName } = data;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const reducerIndexExists = fs.existsSync(reducerIndexPath);
