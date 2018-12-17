@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`"reducer" command When creating a new reducer when style = "rails" the files should match snapshot 1`] = `
+Array [
+  "export const VOLLEYBALL = \\"VOLLEYBALL\\";
+export const SOCCER = \\"SOCCER\\";
+
+export const volleyball = () => {
+  return {
+    type: VOLLEYBALL
+  };
+};
+
+export const soccer = () => {
+  return {
+    type: SOCCER
+  };
+};
+",
+  "import { VOLLEYBALL, SOCCER } from \\"../actions/sports\\";
+
+export default function sports(state = {}, action) {
+  switch (action.type) {
+    case VOLLEYBALL:
+      return state;
+
+    case SOCCER:
+      return state;
+
+    default:
+      return state;
+  }
+}
+",
+]
+`;
