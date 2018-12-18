@@ -57,7 +57,7 @@ rsk reducer volleyball add-score remove-score
 Results in:
 
 *actions/volleyball.js*
-```
+```js
 export const ADD_SCORE = "ADD_SCORE";
 export const REMOVE_SCORE = "REMOVE_SCORE";
 
@@ -75,7 +75,7 @@ export const removeScore = () => {
 ```
 
 *reducers/volleyball.js*
-```
+```js
 import { ADD_SCORE, REMOVE_SCORE } from "../actions/volleyball";
 
 export default function volleyball(state = {}, action) {
@@ -105,7 +105,7 @@ rsk connect Sports volleyball soccer
 ```
 Turns this:
 
-```
+```js
 import React from "react";
 
 const Sports = (props) => {
@@ -138,7 +138,7 @@ Into this:
 
 React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
 
-```
+```js
 module.exports = {
   style: 'ducks',
   codeDirectory: 'src',
