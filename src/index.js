@@ -37,13 +37,4 @@ module.exports = async () => {
   const data = decorateData({command, positionalArgs, paths})
 
   await parseCommand({ command, options, paths, config, positionalArgs, ...data })
-
-  // return await findUp(CONFIG_FILE_NAME)
-  //   .then(configPath => ({ configPath, command, positionalArgs, options }))
-  //   .then(warnMissingDependencies)
-  //   .then(getConfig)
-  //   .then(runValidations)
-  //   .then(decorateData)
-  //   .then(parseCommand)
-  //   .catch(logger.error);
 };
