@@ -5,7 +5,6 @@ const makeDir = require('make-dir');
 const logger = require('../pipeline/logger');
 
 module.exports = async (data) => {
-  console.log('aaa: data', data);
   const { paths } = data;
   const { srcPath, reducerFolder } = paths;
   const storePath = `${srcPath}/store.js`;

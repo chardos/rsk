@@ -6,13 +6,10 @@ const addToReducerIndex = require('../helpers/addToReducerIndex');
 const fs = require('fs');
 
 module.exports = async (data) => {
-  console.log('aaa: data', data);
-
   const { config, positionalArgs, paths } = data;
   const  { srcPath} = paths;
   const { style } = config;
   const [reducerName, ...actions] = positionalArgs;
-  console.log('aaa: reducerName', reducerName);
   
   if (style === 'rails') {
     await createReducerFile({ srcPath, reducerName, actions });
