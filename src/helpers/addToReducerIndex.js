@@ -8,7 +8,8 @@ const { prettify } = require('../utils');
 const t = require("@babel/types");
 
 module.exports = async (data) => {
-  const { srcPath, reducerFolder, positionalArgs, reducerName } = data;
+  const { paths, reducerName } = data;
+  const { srcPath, reducerFolder } = paths;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const reducerIndexExists = fs.existsSync(reducerIndexPath);
 
@@ -16,7 +17,6 @@ module.exports = async (data) => {
     const existingFile = fs.readFileSync(reducerIndexPath).toString();
     const ast = parser(existingFile, {sourceType: 'module'});
     let existingReducers = [];
-    let lastImport;
     let properties;
 
     traverse(ast, {
