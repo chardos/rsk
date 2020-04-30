@@ -12,30 +12,6 @@ npm install -g rsk
 
 ## Notes
 
-All command line arguments can use any type of casing. The following are all equivalent, and will result in a component called `ExampleComponent`.
-
-- `rsk sfc ExampleComponent`
-
-- `rsk sfc example-component`
-
-- `rsk sfc exampleComponent`
-
-## React commands
-
-### React Stateless Component
-
-```
-rsk sfc <component name>
-```
-
-### React Class Component
-
-```
-rsk cc <component name>
-```
-
-## Redux commands
-
 ### Setting up the store
 
 ```
@@ -142,28 +118,5 @@ React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your
 module.exports = {
   style: 'ducks',
   codeDirectory: 'src',
-  componentsDirectory: 'components',
-  template: {
-    sfc: (componentName) => `
-      import React from 'react';
-      
-      const ${componentName} = () => {
-        return <div>Some random text</div>;
-      }
-      
-      export default ${componentName};
-    `,
-    cc: (componentName) => `
-      import React from 'react';
-
-      class ${componentName} extends React.Component {
-        render() { 
-          return <div>Some random text</div>
-        }
-      }
-      
-      export default ${componentName};
-    `
-  }
 }
 ```

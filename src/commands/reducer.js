@@ -6,7 +6,8 @@ const addToReducerIndex = require('../helpers/addToReducerIndex');
 const fs = require('fs');
 
 module.exports = async (data) => {
-  const { config, command, positionalArgs, srcPath, reducerExists } = data;
+  const { config, positionalArgs, paths } = data;
+  const  { srcPath} = paths;
   const { style } = config;
   const [reducerName, ...actions] = positionalArgs;
   

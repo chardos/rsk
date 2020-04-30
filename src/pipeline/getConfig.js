@@ -1,26 +1,20 @@
-const fs = require('fs');
+const fs = require("fs");
 
 const defaultConfig = {
-  style: 'rails',
-  codeDirectory: 'src',
-  componentsDirectory: 'components',
+  style: "rails",
+  codeDirectory: "src",
+  componentsDirectory: "components",
 };
 
-const getConfig = (data) => {
-  const { configPath, options } = data;
+const getConfig = ({ configPath, options }) => {
 
-  const userConfig = configPath
-    ? require(configPath)
-    : {};
+  const userConfig = configPath ? require(configPath) : {};
 
   return {
-    ...data,
-    config: {
-      ...defaultConfig,
-      ...userConfig,
-      ...options
-    }
-  }
+    ...defaultConfig,
+    ...userConfig,
+    ...options,
+  };
 };
 
 module.exports = getConfig;
