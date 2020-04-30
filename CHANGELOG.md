@@ -1,3 +1,7 @@
+#### 1.0.4
+- Security updates
+- Flakienss in tests gone
+
 #### 1.0.3
 - Fix bug where `rsk reducer` errors if no reducers imported in reducer index.
 
