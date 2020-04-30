@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const makeDir = require('make-dir');
 const del = require('del');
 const tmpPath = `${process.cwd()}/tmp`;
+const { wait } = require('./utils');
 
 describe('When running rsk in the command line', () => {
   beforeEach(async () => {
@@ -17,6 +18,7 @@ describe('When running rsk in the command line', () => {
   it('class component should match the snapshot', async () => {
     process.argv.push('cc', 'potato', '--codeDirectory=tmp');
     await rsk();
+    await wait(20);
     const output = await fs.readFile(`${tmpPath}/components/Potato/index.js`);
 
     expect(output.toString()).toMatchSnapshot()
