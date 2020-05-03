@@ -1,6 +1,10 @@
+#### 2.0.0
+- `storeDirectory` now configurable
+- No more `actions` and `reducers` folder. Reducers and actions go into `storeDirectory` folder under their own file, or folder if rails style.
+
 #### 1.0.4
 - Security updates
-- Flakienss in tests gone
+- Flakiness in tests gone
 
 #### 1.0.3
 - Fix bug where `rsk reducer` errors if no reducers imported in reducer index.
