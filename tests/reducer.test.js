@@ -22,8 +22,8 @@ describe('"reducer" command', () => {
         process.argv.splice(2);
         process.argv.push('reducer', 'sports', 'volleyball', 'soccer', '--codeDirectory=tmp');
         await rsk();
-        const actionOutput = await fs.readFile(`${tmpPath}/actions/sports.js`);
-        const reducerOutput = await fs.readFile(`${tmpPath}/reducers/sports.js`);
+        const actionOutput = await fs.readFile(`${tmpPath}/store/sports/actions.js`);
+        const reducerOutput = await fs.readFile(`${tmpPath}/store/sports/reducer.js`);
         
         expect([
           actionOutput.toString(),

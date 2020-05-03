@@ -26,7 +26,7 @@ describe('When running rsk in the command line', () => {
     it('setup-store should create reducer/index.js and match the snapshot', async () => {
       process.argv.push('setup-store', '--codeDirectory=tmp');
       await rsk();
-      const output = await fs.readFile(`${tmpPath}/reducers/index.js`);
+      const output = await fs.readFile(`${tmpPath}/store/index.js`);
   
       expect(output.toString()).toMatchSnapshot()
     });

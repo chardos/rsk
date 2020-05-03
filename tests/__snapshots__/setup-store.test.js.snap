@@ -2,7 +2,7 @@
 
 exports[`When running rsk in the command line When store.js does not already exist setup-store command should create store.js and match the snapshot 1`] = `
 "import { createStore, combineReducers } from \\"redux\\";
-import reducers from \\"./reducers\\";
+import reducers from \\"./store\\";
 
 const rootReducer = combineReducers(reducers);
 

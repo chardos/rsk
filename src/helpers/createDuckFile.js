@@ -5,8 +5,8 @@ const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
 const logger = require('../pipeline/logger');
 const { prettify, lint } = require('../utils');
 
-module.exports = ({ srcPath, reducerName, actions }) => {
-  const ducksDirectoryPath = `${srcPath}/ducks`;
+module.exports = ({ srcPath, reducerName, actions, config }) => {
+  const ducksDirectoryPath = `${srcPath}/${config.storeDirectory}`;
 
   return makeDir(ducksDirectoryPath).then(() => {
     const duckFilePath = `${ducksDirectoryPath}/${reducerName}.js`;
