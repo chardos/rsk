@@ -1,4 +1,4 @@
-# React Scaffold Kit
+# Redux Scaffold Kit
 
 [![npm version](https://img.shields.io/npm/v/rsk.svg?style=flat)](https://www.npmjs.com/package/rsk)
 
@@ -21,7 +21,7 @@ rsk setup-store
 ### Adding a reducer
 
 ```
-rsk reducer <reducer name> <...reducernames>
+rsk reducer <reducer name> <...action names>
 ```
 
 Example:
@@ -32,7 +32,7 @@ rsk reducer volleyball add-score remove-score
 
 Results in:
 
-*actions/volleyball.js*
+*store/volleyball/actions.js*
 ```js
 export const ADD_SCORE = "ADD_SCORE";
 export const REMOVE_SCORE = "REMOVE_SCORE";
@@ -50,7 +50,7 @@ export const removeScore = () => {
 };
 ```
 
-*reducers/volleyball.js*
+*store/volleyball/reducer.js*
 ```js
 import { ADD_SCORE, REMOVE_SCORE } from "../actions/volleyball";
 
@@ -112,11 +112,12 @@ Into this:
 
 ## Config
 
-React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
+Redux Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your root folder.
 
 ```js
 module.exports = {
-  storeDirectory: 'store',
   codeDirectory: 'src',
+  storeDirectory: 'store',
+  combineActionsAndReducers: false,
 }
 ```
