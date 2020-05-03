@@ -1,4 +1,7 @@
 #### 2.0.0
+- `combineActionsAndReducers` property in config will combine actions and reducers into a  single file, instead of the `style` property.
+
+#### 2.0.0
 - `storeDirectory` now configurable
 - No more `actions` and `reducers` folder. Reducers and actions go into `storeDirectory` folder under their own file, or folder if rails style.
 
