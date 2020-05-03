@@ -1,6 +1,6 @@
 const minimist = require("minimist");
 const findUp = require("find-up");
-const getConfig = require("./pipeline/getConfig");
+const resolveConfig = require("./pipeline/resolveConfig");
 const decorateData = require("./pipeline/decorateData");
 const parseCommand = require("./pipeline/parseCommand");
 const warnMissingDependencies = require("./pipeline/warnMissingDependencies");
@@ -15,7 +15,7 @@ module.exports = async () => {
 
   const configPath = await findUp(CONFIG_FILE_NAME);
   await warnMissingDependencies(command);
-  const config = getConfig({ configPath, options });
+  const config = resolveConfig({ configPath, options });
   runValidations({ config, command });
 
   const { codeDirectory, storeDirectory, componentsDirectory } = config;

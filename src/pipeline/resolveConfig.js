@@ -7,7 +7,7 @@ const defaultConfig = {
   componentsDirectory: "components",
 };
 
-const getConfig = ({ configPath, options }) => {
+const resolveConfig = ({ configPath, options }) => {
 
   const userConfig = configPath ? require(configPath) : {};
 
@@ -18,4 +18,4 @@ const getConfig = ({ configPath, options }) => {
   };
 };
 
-module.exports = getConfig;
+module.exports = resolveConfig;
