@@ -6,23 +6,23 @@ const generateDuckCode = require('../renderers/redux/generateDuckCode');
 
 describe('addActionsToReduxFile()', () => {
   describe('on an action file', () => {
-    it('Matches the old snapshot', () => {
+    it('Matches the snapshot', () => {
       const existingFile = generateActionCode('Zone', ['AddZone'])
       const result = addActionsToReduxFile('Zone', ['RemoveZone'], existingFile)
   
       expect(prettify(result)).toMatchSnapshot()
     })
   })
-  describe('on an reducer file', () => {
-    it('Matches the old snapshot', () => {
+  describe('on a reducer file', () => {
+    it('Matches the snapshot', () => {
       const existingFile = generateReducerCode('Zone', ['AddZone'])
       const result = addActionsToReduxFile('Zone', ['RemoveZone'], existingFile)
   
       expect(prettify(result)).toMatchSnapshot()
     })
   })
-  describe('on an duck file', () => {
-    it('Matches the old snapshot', () => {
+  describe('on a duck file', () => {
+    it('Matches the snapshot', () => {
       const existingFile = generateDuckCode('Zone', ['AddZone'])
       const result = addActionsToReduxFile('Zone', ['RemoveZone'], existingFile)
   

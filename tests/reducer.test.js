@@ -15,7 +15,7 @@ describe('"reducer" command', () => {
   })
 
   describe('When creating a new reducer', () => {
-    describe('when style = "rails"', () => {
+    describe('when combineActionsAndReducers is false', () => {
       it('the files should match snapshot', async () => {
         process.argv.push('setup-store', '--codeDirectory=tmp');
         await rsk();

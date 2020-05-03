@@ -8,7 +8,7 @@ const { prettify } = require('../utils');
 const t = require("@babel/types");
 
 module.exports = async (data) => {
-  const { paths, reducerName, style } = data;
+  const { paths, reducerName, combineActionsAndReducers } = data;
   const { srcPath, reducerFolder } = paths;
   const reducerIndexPath = `${srcPath}/${reducerFolder}/index.js`;
   const reducerIndexExists = fs.existsSync(reducerIndexPath);
@@ -40,10 +40,10 @@ module.exports = async (data) => {
 
       // add import
       let importCode;
-      if (style === 'rails') {
-        importCode = `import ${reducerName} from './${reducerName}'`;
-      } else {
+      if (combineActionsAndReducers) {
         importCode = `import ${reducerName} from './${reducerName}/reducer'`;
+      } else {
+        importCode = `import ${reducerName} from './${reducerName}'`;
       }
       exportDefaultPath.insertBefore(parser(importCode, {sourceType: 'module'}));
 
