@@ -1,8 +1,8 @@
-const chalk = require('chalk');
+const chalk = require("chalk");
 
-const error = (err) => {
+const error = err => {
   console.log(chalk.red(err.message));
-  if (process.env.DEBUG === 'true') {
+  if (process.env.DEBUG === "true") {
     console.log(err.stack);
   }
 };
@@ -11,10 +11,10 @@ const warn = text => console.log(chalk.yellow(text));
 
 // Use for debugging. Only visible when DEBUG true.
 const log = (...args) => {
-  if (process.env.DEBUG === 'true') {
+  if (process.env.DEBUG === "true") {
     console.log(...args);
   }
-}
+};
 
 module.exports = {
   error,

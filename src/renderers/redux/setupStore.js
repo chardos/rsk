@@ -1,4 +1,4 @@
-module.exports = (reducerFolder) => `
+module.exports = reducerFolder => `
   import { createStore, combineReducers } from "redux";
   import reducers from "./${reducerFolder}";
 

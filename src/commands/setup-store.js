@@ -1,10 +1,10 @@
-const renderSetupStore = require('../renderers/redux/setupStore');
-const fs = require('fs');
-const { prettify } = require('../utils');
-const makeDir = require('make-dir');
-const logger = require('../pipeline/logger');
+const renderSetupStore = require("../renderers/redux/setupStore");
+const fs = require("fs");
+const { prettify } = require("../utils");
+const makeDir = require("make-dir");
+const logger = require("../pipeline/logger");
 
-module.exports = async (data) => {
+module.exports = async data => {
   const { paths } = data;
   const { srcPath, reducerFolder } = paths;
   const storePath = `${srcPath}/store.js`;
@@ -15,13 +15,15 @@ module.exports = async (data) => {
   const prettifiedStoreCode = prettify(storeCode);
 
   // create an index file
-  const emptyReducersIndex = 'export default {}';
+  const emptyReducersIndex = "export default {}";
 
   // Check for existing store.
   const storeExists = fs.existsSync(storePath);
 
   if (storeExists) {
-    throw new Error(`Sorry, new store can't be created. A store already exists at ${storePath}.`)
+    throw new Error(
+      `Sorry, new store can't be created. A store already exists at ${storePath}.`
+    );
   }
 
   // Look for existing reducers, and add if any.
@@ -30,17 +32,16 @@ module.exports = async (data) => {
   // 3. Check codebase for "combineReducers" ?
   // 3. "Found a reducers folder at ${path}". Adding to your .rsk"
 
-  fs.writeFile(storePath, prettifiedStoreCode, (err) => {
-    if (err) throw new Error(`Setup store write error: ${err}`)
-    logger.success(`${storePath} created.`)
+  fs.writeFile(storePath, prettifiedStoreCode, err => {
+    if (err) throw new Error(`Setup store write error: ${err}`);
+    logger.success(`${storePath} created.`);
   });
-  
 
   await makeDir(reducerDirectoryPath);
-  fs.writeFile(reducerIndexPath, emptyReducersIndex, (err) => {
-    if (err) throw new Error(`Setup store write error: ${err}`)
-    logger.success(`${reducerIndexPath} created.`)
+  fs.writeFile(reducerIndexPath, emptyReducersIndex, err => {
+    if (err) throw new Error(`Setup store write error: ${err}`);
+    logger.success(`${reducerIndexPath} created.`);
   });
 
   return storeCode;
-}
+};

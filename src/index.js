@@ -31,7 +31,7 @@ module.exports = async () => {
     srcPath,
     reducerFolder,
     componentsRootPath: `${srcPath}/${componentsDirectory}`,
-    reducersRootPath: `${srcPath}/${reducerFolder}`,
+    reducersRootPath: `${srcPath}/${reducerFolder}`
   };
 
   const data = decorateData({ command, positionalArgs, paths });
@@ -42,6 +42,6 @@ module.exports = async () => {
     paths,
     config,
     positionalArgs,
-    ...data,
+    ...data
   });
 };
