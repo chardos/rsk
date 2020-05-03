@@ -17,7 +17,7 @@ module.exports = async (data) => {
   }
 
   if (style === 'ducks') {
-    await createDuckFile({ srcPath, reducerName, actions });
+    await createDuckFile({ srcPath, reducerName, config, actions });
   }
   
   await addToReducerIndex(data);

@@ -116,7 +116,7 @@ React Scaffold Kit can be configured using a `.rsk.js` file. Just add it to your
 
 ```js
 module.exports = {
-  style: 'ducks',
+  storeDirectory: 'store',
   codeDirectory: 'src',
 }
 ```
