@@ -1,5 +1,5 @@
-const changeCase = require("change-case");
-const t = require("@babel/types");
+const changeCase = require('change-case');
+const t = require('@babel/types');
 
 exports.renderSwitchStatement = (name, actions) => `
   export default function ${name}(state = {}, action) {
@@ -14,7 +14,7 @@ exports.renderSwitchStatement = (name, actions) => `
 exports.renderImports = (name, actions) => {
   const imports = actions
     .map(actionName => changeCase.constantCase(actionName))
-    .join(",");
+    .join(',');
 
   return `
     import { 
@@ -47,7 +47,7 @@ exports.renderActionCreator = actionName => {
 };
 
 exports.renderConnectedDefaultExport = ({ componentName, reducerNames }) => {
-  const reducersJoined = reducerNames.join(",");
+  const reducersJoined = reducerNames.join(',');
   return `
     const mapStateToProps = ({${reducersJoined}}) => ({${reducersJoined}})
 
@@ -57,7 +57,7 @@ exports.renderConnectedDefaultExport = ({ componentName, reducerNames }) => {
 
 const renderCases = actions => {
   const cases = actions.map(renderCase);
-  return cases.join("");
+  return cases.join('');
 };
 
 const renderCase = actionName => {
@@ -70,7 +70,7 @@ const renderCase = actionName => {
 
 const generateCaseObject = actionName =>
   t.switchCase(t.identifier(changeCase.constantCase(actionName)), [
-    t.returnStatement(t.identifier("state"))
+    t.returnStatement(t.identifier('state'))
   ]);
 
 exports.generateCaseObject = generateCaseObject;

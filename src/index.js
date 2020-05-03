@@ -1,12 +1,12 @@
-const minimist = require("minimist");
-const findUp = require("find-up");
-const resolveConfig = require("./pipeline/resolveConfig");
-const decorateData = require("./pipeline/decorateData");
-const parseCommand = require("./pipeline/parseCommand");
-const warnMissingDependencies = require("./pipeline/warnMissingDependencies");
-const runValidations = require("./pipeline/runValidations");
+const minimist = require('minimist');
+const findUp = require('find-up');
+const resolveConfig = require('./pipeline/resolveConfig');
+const decorateData = require('./pipeline/decorateData');
+const parseCommand = require('./pipeline/parseCommand');
+const warnMissingDependencies = require('./pipeline/warnMissingDependencies');
+const runValidations = require('./pipeline/runValidations');
 
-const CONFIG_FILE_NAME = ".rsk.js";
+const CONFIG_FILE_NAME = '.rsk.js';
 
 module.exports = async () => {
   const args = minimist(process.argv.slice(2));

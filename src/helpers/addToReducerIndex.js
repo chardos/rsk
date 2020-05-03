@@ -1,11 +1,11 @@
-const fs = require("fs");
-const parser = require("@babel/parser").parse;
-const traverse = require("@babel/traverse").default;
-const generate = require("@babel/generator").default;
-const logger = require("../pipeline/logger");
-const { lint } = require("../utils");
-const { prettify } = require("../utils");
-const t = require("@babel/types");
+const fs = require('fs');
+const parser = require('@babel/parser').parse;
+const traverse = require('@babel/traverse').default;
+const generate = require('@babel/generator').default;
+const logger = require('../pipeline/logger');
+const { lint } = require('../utils');
+const { prettify } = require('../utils');
+const t = require('@babel/types');
 
 module.exports = async data => {
   const { paths, reducerName, combineActionsAndReducers } = data;
@@ -15,9 +15,10 @@ module.exports = async data => {
 
   if (reducerIndexExists) {
     const existingFile = fs.readFileSync(reducerIndexPath).toString();
-    const ast = parser(existingFile, { sourceType: "module" });
+    const ast = parser(existingFile, { sourceType: 'module' });
     const existingReducers = [];
     let properties;
+    let exportDefaultPath;
 
     traverse(ast, {
       ExportDefaultDeclaration(path) {
@@ -48,7 +49,7 @@ module.exports = async data => {
         importCode = `import ${reducerName} from './${reducerName}'`;
       }
       exportDefaultPath.insertBefore(
-        parser(importCode, { sourceType: "module" })
+        parser(importCode, { sourceType: 'module' })
       );
 
       // add export

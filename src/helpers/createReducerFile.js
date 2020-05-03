@@ -1,21 +1,18 @@
-const fs = require("fs");
-const prettier = require("prettier");
-const makeDir = require("make-dir");
-const generateReducerCode = require("../renderers/redux/generateReducerCode");
-const addActionsToReduxFile = require("../pipeline/addActionsToReduxFile");
-const logger = require("../pipeline/logger");
-const { lint } = require("../utils");
+const fs = require('fs');
+const prettier = require('prettier');
+const generateReducerCode = require('../renderers/redux/generateReducerCode');
+const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
+const logger = require('../pipeline/logger');
+const { lint } = require('../utils');
 
 module.exports = async ({ srcPath, reducerName, actions, storeDirectory }) => {
   const reducersPath = `${srcPath}/${storeDirectory}/${reducerName}`;
-
-  const path = await makeDir(reducersPath);
   const reducerPath = `${reducersPath}/reducer.js`;
   let reducerCode;
 
   if (fs.existsSync(reducerPath)) {
     logger.success(
-      `reducers/${reducerName}.js exists. Adding actions: ${actions.join(", ")}`
+      `reducers/${reducerName}.js exists. Adding actions: ${actions.join(', ')}`
     );
 
     const existingFile = fs.readFileSync(reducerPath).toString();
@@ -25,7 +22,7 @@ module.exports = async ({ srcPath, reducerName, actions, storeDirectory }) => {
     reducerCode = generateReducerCode(reducerName, actions);
   }
 
-  const prettifiedCode = prettier.format(reducerCode, { parser: "babylon" });
+  const prettifiedCode = prettier.format(reducerCode, { parser: 'babylon' });
 
   lint(prettifiedCode);
 

@@ -1,15 +1,15 @@
-const parser = require("@babel/parser").parse;
-const traverse = require("@babel/traverse").default;
-const generate = require("@babel/generator").default;
+const parser = require('@babel/parser').parse;
+const traverse = require('@babel/traverse').default;
+const generate = require('@babel/generator').default;
 const {
   renderExportedConstant,
   renderActionCreator,
   generateCaseObject,
   makeImportSpecifier
-} = require("../renderers/redux");
-const { lint } = require("../utils");
-const get = require("lodash.get");
-const t = require("@babel/types");
+} = require('../renderers/redux');
+const { lint } = require('../utils');
+const get = require('lodash.get');
+const t = require('@babel/types');
 
 /**
  * addActionsToReduxFile -
@@ -18,7 +18,7 @@ const t = require("@babel/types");
  */
 
 const addActionsToReduxFile = (reducerName, actions, existingFile) => {
-  const ast = parser(existingFile, { sourceType: "module" });
+  const ast = parser(existingFile, { sourceType: 'module' });
 
   let lastConstantExport;
   let lastActionCreatorExport;
@@ -27,7 +27,7 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
 
   traverse(ast, {
     ExportNamedDeclaration(path) {
-      const init = get(path, "node.declaration.declarations.0.init");
+      const init = get(path, 'node.declaration.declarations.0.init');
       const isArrowFn = t.isArrowFunctionExpression(init);
       const isStringLiteral = t.isStringLiteral(init);
 
@@ -49,21 +49,21 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
     }
   });
 
-  const constantsCode = actions.map(renderExportedConstant).join("\n");
+  const constantsCode = actions.map(renderExportedConstant).join('\n');
 
-  const actionCreatorsCode = actions.map(renderActionCreator).join("\n");
+  const actionCreatorsCode = actions.map(renderActionCreator).join('\n');
 
   const casesCode = actions.map(generateCaseObject);
 
   if (lastConstantExport) {
     lastConstantExport.insertAfter(
-      parser(constantsCode, { sourceType: "module" })
+      parser(constantsCode, { sourceType: 'module' })
     );
   }
 
   if (lastActionCreatorExport) {
     lastActionCreatorExport.insertAfter(
-      parser(actionCreatorsCode, { sourceType: "module" })
+      parser(actionCreatorsCode, { sourceType: 'module' })
     );
   }
 

@@ -1,4 +1,4 @@
-const changeCase = require("change-case");
+const changeCase = require('change-case');
 
 function generateActionCode(name, actions) {
   const constants = renderConstants(actions);
@@ -16,7 +16,7 @@ const renderConstants = actions =>
       const constantName = changeCase.constantCase(actionName);
       return `export const ${constantName} = '${constantName}'`;
     })
-    .join("\n");
+    .join('\n');
 
 const renderActionCreators = actions =>
   actions
@@ -32,6 +32,6 @@ const renderActionCreators = actions =>
         }
       `;
     })
-    .join("\n");
+    .join('\n');
 
 module.exports = generateActionCode;

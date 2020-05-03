@@ -1,7 +1,7 @@
-const createReducerFile = require("../helpers/createReducerFile");
-const createActionFile = require("../helpers/createActionFile");
-const createDuckFile = require("../helpers/createDuckFile");
-const addToReducerIndex = require("../helpers/addToReducerIndex");
+const createReducerFile = require('../helpers/createReducerFile');
+const createActionFile = require('../helpers/createActionFile');
+const createDuckFile = require('../helpers/createDuckFile');
+const addToReducerIndex = require('../helpers/addToReducerIndex');
 
 module.exports = async data => {
   const { config, positionalArgs, paths } = data;

@@ -1,5 +1,5 @@
-const findUp = require("find-up");
-const { COMMANDS } = require("../constants/commands");
+const findUp = require('find-up');
+const { COMMANDS } = require('../constants/commands');
 
 const runValidations = async data => {
   const { config, command } = data;

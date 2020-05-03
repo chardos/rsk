@@ -1,15 +1,15 @@
-const Linter = require("eslint").Linter;
-const parser = require("@babel/parser").parse;
-const prettier = require("prettier");
+const Linter = require('eslint').Linter;
+const parser = require('@babel/parser').parse;
+const prettier = require('prettier');
 
-exports.prettify = code => prettier.format(code, { parser: "babylon" });
+exports.prettify = code => prettier.format(code, { parser: 'babylon' });
 
 exports.lint = code => {
   const linter = new Linter();
   const messages = linter.verify(code, {
     parserOptions: {
       ecmaVersion: 6,
-      sourceType: "module",
+      sourceType: 'module',
       ecmaFeatures: {
         jsx: true
       }
@@ -24,4 +24,4 @@ exports.lint = code => {
   }
 };
 
-exports.parse = str => parser(str, { sourceType: "module", plugins: ["jsx"] });
+exports.parse = str => parser(str, { sourceType: 'module', plugins: ['jsx'] });

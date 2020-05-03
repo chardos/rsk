@@ -1,8 +1,8 @@
-const renderSetupStore = require("../renderers/redux/setupStore");
-const fs = require("fs");
-const { prettify } = require("../utils");
-const makeDir = require("make-dir");
-const logger = require("../pipeline/logger");
+const renderSetupStore = require('../renderers/redux/setupStore');
+const fs = require('fs');
+const { prettify } = require('../utils');
+const makeDir = require('make-dir');
+const logger = require('../pipeline/logger');
 
 module.exports = async data => {
   const { paths } = data;
@@ -15,7 +15,7 @@ module.exports = async data => {
   const prettifiedStoreCode = prettify(storeCode);
 
   // create an index file
-  const emptyReducersIndex = "export default {}";
+  const emptyReducersIndex = 'export default {}';
 
   // Check for existing store.
   const storeExists = fs.existsSync(storePath);

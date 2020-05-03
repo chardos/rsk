@@ -1,6 +1,6 @@
-const REDUCER = "reducer";
-const SETUP_STORE = "setup-store";
-const CONNECT = "connect";
+const REDUCER = 'reducer';
+const SETUP_STORE = 'setup-store';
+const CONNECT = 'connect';
 
 exports.REDUCER = REDUCER;
 exports.SETUP_STORE = SETUP_STORE;

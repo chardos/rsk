@@ -1,14 +1,13 @@
-const changeCase = require("change-case");
 const {
   renderExportedConstant,
   renderSwitchStatement,
   renderActionCreator
-} = require("../redux");
+} = require('../redux');
 
 const renderExportedConstants = actions =>
-  actions.map(renderExportedConstant).join("\n");
+  actions.map(renderExportedConstant).join('\n');
 
-const renderFunctions = actions => actions.map(renderActionCreator).join("\n");
+const renderFunctions = actions => actions.map(renderActionCreator).join('\n');
 
 module.exports = function createDuckCode(name, actions) {
   const constants = renderExportedConstants(actions);

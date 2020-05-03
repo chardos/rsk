@@ -1,9 +1,9 @@
-const fs = require("fs");
-const traverse = require("@babel/traverse").default;
-const generate = require("@babel/generator").default;
-const { renderConnectedDefaultExport } = require("../renderers/redux");
-const { parse, prettify, lint } = require("../utils");
-const logger = require("../pipeline/logger");
+const fs = require('fs');
+const traverse = require('@babel/traverse').default;
+const generate = require('@babel/generator').default;
+const { renderConnectedDefaultExport } = require('../renderers/redux');
+const { parse, prettify, lint } = require('../utils');
+const logger = require('../pipeline/logger');
 
 module.exports = async data => {
   const { componentPath, reducerNames } = data;
@@ -21,7 +21,7 @@ module.exports = async data => {
 
   traverse(ast, {
     ImportDeclaration(path) {
-      if (path.node.source.value === "react") {
+      if (path.node.source.value === 'react') {
         reactImportPath = path;
       }
     },
@@ -50,7 +50,7 @@ module.exports = async data => {
 
   const newCode = generate(ast).code;
   const prettifiedCode = prettify(newCode);
-  logger.log("prettifiedCode", prettifiedCode);
+  logger.log('prettifiedCode', prettifiedCode);
 
   lint(prettifiedCode);
 

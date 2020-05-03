@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { REDUCER, CONNECT } = require("../constants/commands");
+const fs = require('fs');
+const { REDUCER, CONNECT } = require('../constants/commands');
 
 const decorateData = ({ command, positionalArgs, paths }) => {
   const data = {};

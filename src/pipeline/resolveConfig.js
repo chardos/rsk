@@ -1,10 +1,8 @@
-const fs = require("fs");
-
 const defaultConfig = {
   combineActionsAndReducers: false,
-  codeDirectory: "src",
-  storeDirectory: "store",
-  componentsDirectory: "components"
+  codeDirectory: 'src',
+  storeDirectory: 'store',
+  componentsDirectory: 'components'
 };
 
 const resolveConfig = ({ configPath, options }) => {
