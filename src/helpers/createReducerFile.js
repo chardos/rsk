@@ -1,3 +1,4 @@
+const makeDir = require('make-dir');
 const fs = require('fs');
 const prettier = require('prettier');
 const generateReducerCode = require('../renderers/redux/generateReducerCode');
@@ -7,6 +8,7 @@ const { lint } = require('../utils');
 
 module.exports = async ({ srcPath, reducerName, actions, storeDirectory }) => {
   const reducersPath = `${srcPath}/${storeDirectory}/${reducerName}`;
+  await makeDir(reducersPath);
   const reducerPath = `${reducersPath}/reducer.js`;
   let reducerCode;
 

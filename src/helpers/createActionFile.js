@@ -8,9 +8,9 @@ const { lint } = require('../utils');
 
 module.exports = async ({ srcPath, reducerName, actions, storeDirectory }) => {
   const actionsPath = `${srcPath}/${storeDirectory}`;
+  await makeDir(actionsPath);
 
-  const path = await makeDir(actionsPath);
-  const actionPath = `${path}/${reducerName}/actions.js`;
+  const actionPath = `${actionsPath}/${reducerName}/actions.js`;
   let actionCode;
 
   if (fs.existsSync(actionPath)) {

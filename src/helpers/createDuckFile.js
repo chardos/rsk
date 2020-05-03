@@ -15,13 +15,13 @@ module.exports = ({ srcPath, reducerName, actions, config }) => {
     // check here if the file exists
     if (fs.existsSync(duckFilePath)) {
       logger.success(
-        `ducks/${reducerName}.js exists. Adding actions: ${actions.join(', ')}`
+        `${reducerName}.js exists. Adding actions: ${actions.join(', ')}`
       );
 
       const existingFile = fs.readFileSync(duckFilePath).toString();
       duckCode = addActionsToReduxFile(reducerName, actions, existingFile);
     } else {
-      logger.success(`Creating ducks/${reducerName}.js`);
+      logger.success(`Creating ${reducerName}.js`);
       duckCode = generateDuckCode(reducerName, actions);
     }
 
