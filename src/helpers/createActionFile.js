@@ -6,11 +6,11 @@ const addActionsToReduxFile = require('../pipeline/addActionsToReduxFile');
 const logger = require('../pipeline/logger');
 const { lint } = require('../utils');
 
-module.exports = async ({ srcPath, reducerName, actions }) => {
-  const actionsPath = `${srcPath}/actions`;
+module.exports = async ({ srcPath, reducerName, actions, storeDirectory }) => {
+  const actionsPath = `${srcPath}/${storeDirectory}`;
 
   const path = await makeDir(actionsPath);
-  const actionPath = `${path}/${reducerName}.js`;
+  const actionPath = `${path}/${reducerName}/actions.js`;
   let actionCode;
 
   if (fs.existsSync(actionPath)) {
