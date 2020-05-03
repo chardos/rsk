@@ -5,13 +5,13 @@ const { renderConnectedDefaultExport } = require('../renderers/redux');
 const { parse, prettify, lint } = require('../utils');
 const logger = require('../pipeline/logger');
 
-module.exports = async (data) => {
+module.exports = async data => {
   const { componentPath, reducerNames } = data;
-  
+
   const componentExists = fs.existsSync(componentPath);
 
   if (!componentExists) {
-    throw new Error(`Sorry, couldn't find a component at ${componentPath}.`)
+    throw new Error(`Sorry, couldn't find a component at ${componentPath}.`);
   }
 
   const existingFile = fs.readFileSync(componentPath).toString();
@@ -28,21 +28,25 @@ module.exports = async (data) => {
 
     ExportDefaultDeclaration(path) {
       exportDefaultPath = path;
-    },
-  })
+    }
+  });
 
   const declarationName = exportDefaultPath.node.declaration.name;
 
-  reactImportPath.insertAfter(parse(`
+  reactImportPath.insertAfter(
+    parse(`
     import { connect } from 'react-redux';
-  `))
+  `)
+  );
 
   exportDefaultPath.replaceWith(
-    parse(renderConnectedDefaultExport({
-      componentName: declarationName,
-      reducerNames
-    }))
-  )
+    parse(
+      renderConnectedDefaultExport({
+        componentName: declarationName,
+        reducerNames
+      })
+    )
+  );
 
   const newCode = generate(ast).code;
   const prettifiedCode = prettify(newCode);
@@ -50,7 +54,7 @@ module.exports = async (data) => {
 
   lint(prettifiedCode);
 
-  fs.writeFile(componentPath, prettifiedCode, (err) => {
-    if (err) throw new Error(err)
+  fs.writeFile(componentPath, prettifiedCode, err => {
+    if (err) throw new Error(err);
   });
 };

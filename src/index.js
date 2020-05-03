@@ -1,12 +1,12 @@
-const minimist = require("minimist");
-const findUp = require("find-up");
-const getConfig = require("./pipeline/getConfig");
-const decorateData = require("./pipeline/decorateData");
-const parseCommand = require("./pipeline/parseCommand");
-const warnMissingDependencies = require("./pipeline/warnMissingDependencies");
-const runValidations = require("./pipeline/runValidations");
+const minimist = require('minimist');
+const findUp = require('find-up');
+const resolveConfig = require('./pipeline/resolveConfig');
+const decorateData = require('./pipeline/decorateData');
+const parseCommand = require('./pipeline/parseCommand');
+const warnMissingDependencies = require('./pipeline/warnMissingDependencies');
+const runValidations = require('./pipeline/runValidations');
 
-const CONFIG_FILE_NAME = ".rsk.js";
+const CONFIG_FILE_NAME = '.rsk.js';
 
 module.exports = async () => {
   const args = minimist(process.argv.slice(2));
@@ -15,7 +15,7 @@ module.exports = async () => {
 
   const configPath = await findUp(CONFIG_FILE_NAME);
   await warnMissingDependencies(command);
-  const config = getConfig({ configPath, options });
+  const config = resolveConfig({ configPath, options });
   runValidations({ config, command });
 
   const { codeDirectory, storeDirectory, componentsDirectory } = config;
@@ -31,7 +31,7 @@ module.exports = async () => {
     srcPath,
     reducerFolder,
     componentsRootPath: `${srcPath}/${componentsDirectory}`,
-    reducersRootPath: `${srcPath}/${reducerFolder}`,
+    reducersRootPath: `${srcPath}/${reducerFolder}`
   };
 
   const data = decorateData({ command, positionalArgs, paths });
@@ -42,6 +42,6 @@ module.exports = async () => {
     paths,
     config,
     positionalArgs,
-    ...data,
+    ...data
   });
 };

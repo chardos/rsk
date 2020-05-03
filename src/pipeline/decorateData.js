@@ -1,9 +1,9 @@
-const fs = require("fs");
-const { REDUCER, CONNECT } = require("../constants/commands");
+const fs = require('fs');
+const { REDUCER, CONNECT } = require('../constants/commands');
 
 const decorateData = ({ command, positionalArgs, paths }) => {
-  const  data = {};
-  
+  const data = {};
+
   if (command === REDUCER) {
     const [reducerName, ...actions] = positionalArgs;
     data.reducerName = reducerName;
@@ -16,7 +16,9 @@ const decorateData = ({ command, positionalArgs, paths }) => {
     const [componentName, ...reducerNames] = positionalArgs;
     data.componentName = componentName;
     data.reducerNames = reducerNames;
-    data.componentPath = `${paths.componentsRootPath}/${componentName}/index.js`;
+    data.componentPath = `${
+      paths.componentsRootPath
+    }/${componentName}/index.js`;
   }
 
   return data;

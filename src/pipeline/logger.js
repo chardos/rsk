@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-const error = (err) => {
+const error = err => {
   console.log(chalk.red(err.message));
   if (process.env.DEBUG === 'true') {
     console.log(err.stack);
@@ -14,7 +14,7 @@ const log = (...args) => {
   if (process.env.DEBUG === 'true') {
     console.log(...args);
   }
-}
+};
 
 module.exports = {
   error,

@@ -1,5 +1,4 @@
 const { renderSwitchStatement, renderImports } = require('../redux');
-const changeCase = require('change-case');
 
 function createReducerCode(name, actions) {
   return `
@@ -7,6 +6,5 @@ function createReducerCode(name, actions) {
     ${renderSwitchStatement(name, actions)}
   `;
 }
-
 
 module.exports = createReducerCode;

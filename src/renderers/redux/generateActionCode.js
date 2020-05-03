@@ -10,18 +10,17 @@ function generateActionCode(name, actions) {
   `;
 }
 
-const renderConstants = actions => (
+const renderConstants = actions =>
   actions
-    .map((actionName) => {
+    .map(actionName => {
       const constantName = changeCase.constantCase(actionName);
       return `export const ${constantName} = '${constantName}'`;
     })
-    .join('\n')
-);
+    .join('\n');
 
-const renderActionCreators = actions => (
+const renderActionCreators = actions =>
   actions
-    .map((actionName) => {
+    .map(actionName => {
       const variableName = changeCase.camelCase(actionName);
       const constantName = changeCase.constantCase(actionName);
 
@@ -33,7 +32,6 @@ const renderActionCreators = actions => (
         }
       `;
     })
-    .join('\n')
-);
+    .join('\n');
 
 module.exports = generateActionCode;

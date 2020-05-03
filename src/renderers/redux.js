@@ -1,5 +1,5 @@
 const changeCase = require('change-case');
-const t = require("@babel/types");
+const t = require('@babel/types');
 
 exports.renderSwitchStatement = (name, actions) => `
   export default function ${name}(state = {}, action) {
@@ -23,17 +23,17 @@ exports.renderImports = (name, actions) => {
   `;
 };
 
-exports.renderExportedConstant = (actionName) => {
+exports.renderExportedConstant = actionName => {
   const constantName = changeCase.constantCase(actionName);
   return `export const ${constantName} = '${constantName}'`;
-}
+};
 
-exports.makeImportSpecifier = (actionName) => {
-  const identifier = t.identifier(changeCase.constantCase(actionName))
-  return t.importSpecifier(identifier, identifier)
-}
+exports.makeImportSpecifier = actionName => {
+  const identifier = t.identifier(changeCase.constantCase(actionName));
+  return t.importSpecifier(identifier, identifier);
+};
 
-exports.renderActionCreator = (actionName) => {
+exports.renderActionCreator = actionName => {
   const variableName = changeCase.camelCase(actionName);
   const constantName = changeCase.constantCase(actionName);
 
@@ -44,40 +44,34 @@ exports.renderActionCreator = (actionName) => {
       }
     }
   `;
-}
+};
 
-exports.renderConnectedDefaultExport = ({componentName, reducerNames}) => {
-  const reducersJoined = reducerNames.join(',')
+exports.renderConnectedDefaultExport = ({ componentName, reducerNames }) => {
+  const reducersJoined = reducerNames.join(',');
   return `
     const mapStateToProps = ({${reducersJoined}}) => ({${reducersJoined}})
 
     export default connect(mapStateToProps)(${componentName})
-  `
-}
+  `;
+};
 
-const renderCases = (actions) => {
+const renderCases = actions => {
   const cases = actions.map(renderCase);
   return cases.join('');
 };
 
-const renderCase = (actionName) => {
+const renderCase = actionName => {
   const constantName = changeCase.constantCase(actionName);
   return `
     case ${constantName}:
       return state;
   `;
-}
+};
 
-const generateCaseObject = (actionName) => (
-  t.switchCase(
-    t.identifier(changeCase.constantCase(actionName)),
-    [
-      t.returnStatement(
-        t.identifier('state')
-      )
-    ]
-  )
-)
+const generateCaseObject = actionName =>
+  t.switchCase(t.identifier(changeCase.constantCase(actionName)), [
+    t.returnStatement(t.identifier('state'))
+  ]);
 
 exports.generateCaseObject = generateCaseObject;
 exports.renderCases = renderCases;

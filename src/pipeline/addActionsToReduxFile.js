@@ -1,10 +1,15 @@
 const parser = require('@babel/parser').parse;
 const traverse = require('@babel/traverse').default;
 const generate = require('@babel/generator').default;
-const { renderExportedConstant, renderActionCreator, generateCaseObject, makeImportSpecifier } = require('../renderers/redux');
+const {
+  renderExportedConstant,
+  renderActionCreator,
+  generateCaseObject,
+  makeImportSpecifier
+} = require('../renderers/redux');
 const { lint } = require('../utils');
 const get = require('lodash.get');
-const t = require("@babel/types");
+const t = require('@babel/types');
 
 /**
  * addActionsToReduxFile -
@@ -13,7 +18,7 @@ const t = require("@babel/types");
  */
 
 const addActionsToReduxFile = (reducerName, actions, existingFile) => {
-  const ast = parser(existingFile, {sourceType: 'module'});
+  const ast = parser(existingFile, { sourceType: 'module' });
 
   let lastConstantExport;
   let lastActionCreatorExport;
@@ -29,7 +34,7 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
       if (isStringLiteral) {
         lastConstantExport = path;
       }
-      
+
       if (isArrowFn) {
         lastActionCreatorExport = path;
       }
@@ -42,40 +47,40 @@ const addActionsToReduxFile = (reducerName, actions, existingFile) => {
     ImportSpecifier(path) {
       lastImportSpecifier = path;
     }
-  })
-  
-  const constantsCode = actions
-    .map(renderExportedConstant)
-    .join('\n')
+  });
 
-  const actionCreatorsCode = actions
-    .map(renderActionCreator)
-    .join('\n')
+  const constantsCode = actions.map(renderExportedConstant).join('\n');
+
+  const actionCreatorsCode = actions.map(renderActionCreator).join('\n');
 
   const casesCode = actions.map(generateCaseObject);
 
   if (lastConstantExport) {
-    lastConstantExport.insertAfter(parser(constantsCode, {sourceType: 'module'}))
+    lastConstantExport.insertAfter(
+      parser(constantsCode, { sourceType: 'module' })
+    );
   }
 
   if (lastActionCreatorExport) {
-    lastActionCreatorExport.insertAfter(parser(actionCreatorsCode, {sourceType: 'module'}))
+    lastActionCreatorExport.insertAfter(
+      parser(actionCreatorsCode, { sourceType: 'module' })
+    );
   }
 
   if (lastSwitchCaseStatement) {
-    lastSwitchCaseStatement.insertBefore(casesCode)
+    lastSwitchCaseStatement.insertBefore(casesCode);
   }
 
   if (lastImportSpecifier) {
-    const specifiers = actions.map(makeImportSpecifier)
-    lastImportSpecifier.insertAfter(specifiers)
+    const specifiers = actions.map(makeImportSpecifier);
+    lastImportSpecifier.insertAfter(specifiers);
   }
 
   const newCode = generate(ast).code;
-  
+
   lint(newCode);
 
-  return newCode
-}
+  return newCode;
+};
 
 module.exports = addActionsToReduxFile;
