@@ -6,16 +6,14 @@ const addToReducerIndex = require('../helpers/addToReducerIndex');
 module.exports = async (data) => {
   const { config, positionalArgs, paths } = data;
   const  { srcPath} = paths;
-  const { style, storeDirectory } = config;
+  const { combineActionsAndReducers, storeDirectory } = config;
   const [reducerName, ...actions] = positionalArgs;
   
-  if (style === 'rails') {
+  if (combineActionsAndReducers) {
+    await createDuckFile({ srcPath, reducerName, config, actions });
+  } else {
     await createReducerFile({ srcPath, reducerName, actions, storeDirectory });
     await createActionFile({ srcPath, reducerName, actions, storeDirectory });
-  }
-
-  if (style === 'ducks') {
-    await createDuckFile({ srcPath, reducerName, config, actions });
   }
   
   await addToReducerIndex(data);

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`"reducer" command When creating a new reducer when style = "rails" the files should match snapshot 1`] = `
+exports[`"reducer" command When creating a new reducer when combineActionsAndReducers is false the files should match snapshot 1`] = `
 Array [
   "export const VOLLEYBALL = \\"VOLLEYBALL\\";
 export const SOCCER = \\"SOCCER\\";

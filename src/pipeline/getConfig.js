@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const defaultConfig = {
-  style: "rails",
+  combineActionsAndReducers: false,
   codeDirectory: "src",
   storeDirectory: "store",
   componentsDirectory: "components",
