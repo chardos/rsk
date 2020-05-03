@@ -3,8 +3,6 @@ const createActionFile = require('../helpers/createActionFile');
 const createDuckFile = require('../helpers/createDuckFile');
 const addToReducerIndex = require('../helpers/addToReducerIndex');
 
-const fs = require('fs');
-
 module.exports = async (data) => {
   const { config, positionalArgs, paths } = data;
   const  { srcPath} = paths;
